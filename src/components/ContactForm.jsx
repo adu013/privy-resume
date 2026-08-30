@@ -1,4 +1,5 @@
 import React from "react";
+import ColorPicker from "./ColorPicker";
 
 export default function ContactForm({ resumeData, onInputChange }) {
   return (
@@ -34,6 +35,9 @@ export default function ContactForm({ resumeData, onInputChange }) {
           />
         </div>
       </div>
+
+      {/* 🎨 NEW COLOR PICKER MODULAR INSERTION */}
+      <ColorPicker resumeData={resumeData} onInputChange={onInputChange} />
 
            {/* 👈 NEW PRIVYRESUME BRANDING TOGGLE BOX */}
       <div style={{

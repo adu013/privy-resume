@@ -38,6 +38,9 @@ export default function App() {
     references: [
       { name: "", title: "", company: "", contact: "" }
     ],
+    // Headline color
+    headlineColor: "#4f46e5",
+
     // Branding checkbox (True by default)
     showBranding: true
   };

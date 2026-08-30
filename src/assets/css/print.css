@@ -75,7 +75,7 @@
   }
 
   .resume-section-title {
-    color: #4f46e5 !important;
+    color: var(--accent-color, #111111) !important;
     border-bottom: 1px solid #cbd5e1 !important;
     margin-bottom: 8px !important;
     page-break-after: avoid !important;

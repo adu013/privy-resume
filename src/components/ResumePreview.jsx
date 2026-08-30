@@ -6,8 +6,9 @@ import PreviewEducation from "./preview/PreviewEducation";
 import PreviewReferences from "./preview/PreviewReferences";
 
 export default function ResumePreview({ resumeData }) {
+    const activeColor = resumeData.headlineColor || "#4f46e5";
   return (
-    <div className="preview-panel">
+    <div className="preview-panel" style={{ "--accent-color": activeColor }}>
       <div className="a4-page">
 
         {/* 1. Core Header Details & Social Links */}
