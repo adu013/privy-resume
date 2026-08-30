@@ -183,7 +183,7 @@ export default function Workspace({
               ← Previous Section
             </button>
 
-            {currentStep < 9 ? (
+            {currentStep < 10 ? (
               <button
                 onClick={handleNext}
                 style={{ padding: "10px 20px", background: "linear-gradient(to right, #9333ea, #4f46e5)", color: "white", border: "none", borderRadius: "8px", fontWeight: "700", cursor: "pointer" }}
