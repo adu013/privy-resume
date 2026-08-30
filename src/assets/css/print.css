@@ -86,3 +86,24 @@
     color: #334155 !important;
   }
 }
+
+/* Modern Layout */
+  .a4-page.layout-modern {
+    display: grid !important;
+    grid-template-columns: 2.2fr 4.8fr !important;
+    gap: 30px !important;
+    align-items: start;
+  }
+  .layout-modern .resume-header { grid-column: 1 / -1 !important; }
+  .layout-modern-left-col {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    border-right: 1px solid #cbd5e1 !important;
+    padding-right: 14px !important;
+  }
+  .layout-modern-right-col {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+  }

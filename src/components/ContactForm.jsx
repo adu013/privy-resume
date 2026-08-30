@@ -1,5 +1,6 @@
 import React from "react";
 import ColorPicker from "./ColorPicker";
+import LayoutSwitcher from "./LayoutSwitcher";
 
 export default function ContactForm({ resumeData, onInputChange }) {
   return (
@@ -36,8 +37,11 @@ export default function ContactForm({ resumeData, onInputChange }) {
         </div>
       </div>
 
-      {/* 🎨 NEW COLOR PICKER MODULAR INSERTION */}
+      {/* 🎨 Color Picker */}
       <ColorPicker resumeData={resumeData} onInputChange={onInputChange} />
+
+      {/* Layout Switcher */}
+      <LayoutSwitcher resumeData={resumeData} onInputChange={onInputChange} />
 
            {/* 👈 NEW PRIVYRESUME BRANDING TOGGLE BOX */}
       <div style={{

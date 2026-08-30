@@ -38,6 +38,10 @@ export default function App() {
     references: [
       { name: "", title: "", company: "", contact: "" }
     ],
+
+    // Layout
+    selectedLayout: "classic",
+
     // Headline color
     headlineColor: "#4f46e5",
 

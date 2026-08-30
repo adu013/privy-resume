@@ -1,0 +1,68 @@
+/* ==========================================================================
+   📊 STEP 1 (GAP FIX): MODERN TEMPLATE PERFECT CANVAS LOCK
+   ========================================================================== */
+
+.a4-page.layout-modern {
+  display: block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Force header to stretch 100% and clear default paragraph tracking gaps */
+.a4-page.layout-modern .resume-header {
+  width: 100% !important;
+  display: block !important;
+  text-align: center !important;
+  /* margin: 0 0 24px 0 !important;   Pristine 24px spacing underneath the bottom border line */
+  padding-bottom: 12px !important;
+  border-bottom: 2px solid #334155 !important;
+}
+
+/* 👈 NEW: Flattens the default browser margin spacing on your name text */
+.a4-page.layout-modern .resume-name {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.1 !important;
+}
+
+/* 👈 NEW: Tightens the links row and clips it right underneath your name */
+.a4-page.layout-modern .resume-contact-row {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin: 6px 0 0 0 !important; /* Forces a tight 6px gap beneath the name text line */
+  padding: 0 !important;
+}
+
+/* ==========================================================================
+   📊 STEP 2: THE SIDE-BY-SIDE COLUMN GRID WRAPPER
+   ========================================================================== */
+
+/* This layout container sits below your header and cleanly splits
+   the paper into a 2-column sidebar grid with a crisp gap. */
+.a4-page.layout-modern .layout-modern-columns-wrapper {
+  display: grid !important;
+  grid-template-columns: 2fr 5fr !important; /* Balanced side-by-side split */
+  gap: 24px !important;                       /* Spacing between the columns */
+  width: 100% !important;
+  align-items: start !important;
+  margin-top: 16px !important;                /* Clean spacing right after the header border line */
+}
+
+.a4-page.layout-modern .layout-modern-left-col {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  border-right: 1px solid #e2e8f0 !important; /* Crisp vertical divider line */
+  padding-right: 16px !important;
+  width: 100% !important;
+}
+
+.a4-page.layout-modern .layout-modern-right-col {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  width: 100% !important;
+}

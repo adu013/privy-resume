@@ -1,5 +1,5 @@
 /* ==========================================================================
-   🖥️ INTERACTIVE ONSCREEN RESUME PREVIEW PANEL (HELVETICA BASE)
+   🖥️ INTERACTIVE ONSCREEN RESUME PREVIEW PANEL (SHARED BASE SETTINGS)
    ========================================================================== */
 .preview-panel {
   padding: 32px;
@@ -19,17 +19,18 @@
   padding: 40px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Clean global design lock */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+/* Look for this class in preview.css and update it to match this exactly: */
 .resume-header {
+  width: 100% !important; /* 👈 THE CORE FORCE FIX */
+  display: block !important;
   text-align: center;
   border-bottom: 2px solid #334155;
   padding-bottom: 12px;
 }
+
 
 .resume-name {
   font-size: 28px;
@@ -42,12 +43,10 @@
 
 .resume-contact-row {
   display: flex;
-  justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
   font-size: 12px;
   color: #475569;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .resume-section-title {
