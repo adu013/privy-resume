@@ -1,0 +1,88 @@
+/* ==========================================================================
+   🖨️ NATIVE MULTI-PAGE MARGIN LOCK (GUARANTEES TOP MARGIN ON PAGE 2+)
+   ========================================================================== */
+@media print {
+  /* 1. Reset master page background frames and grid canvas limitations */
+  body,
+  .landing-page,
+  .workspace-container,
+  .workspace-main,
+  .glow-container,
+  .preview-panel {
+    background: #ffffff !important;
+    color: #1e293b !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+    min-height: auto !important;
+    display: block !important;
+    overflow: visible !important;
+    width: 100% !important;
+  }
+
+  /* 2. Hide Web App Controls */
+  .workspace-header,
+  .form-panel,
+  .header,
+  .footer,
+  .glow-container {
+    display: none !important;
+  }
+
+  /* 3. THE BULLETPROOF MULTI-PAGE FIX
+     This tells the printer engine to hardcode an automatic 20mm margin space
+     at the top, bottom, left, and right of EVERY single physical sheet of paper. */
+  @page {
+    size: A4 portrait;
+    margin: 20mm 20mm 20mm 20mm !important; /* 👈 FORCES CRICK MARGIN ON PAGE 2+ */
+  }
+
+  /* 4. Reset the paper canvas container to match native margins */
+  .a4-page {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    width: 100% !important; /* Let native print margins define the width */
+    max-width: 100% !important;
+    min-height: 0 !important;
+    padding: 0 !important; /* Set to 0 because @page now manages margins! */
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: #ffffff !important;
+    color: #1e293b !important;
+    overflow: visible !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* 5. PREVENT TEXT LINE SEVERING CHOP LINES
+     Ensures entire section entries stay grouped neatly on one page */
+  .a4-page > div,
+  .a4-page ul,
+  .a4-page li {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* 6. Typography Color Theme Print Enforcements */
+  .resume-name {
+    color: #0f172a !important;
+  }
+
+  .resume-section-title {
+    color: #4f46e5 !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+    margin-bottom: 8px !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .resume-text {
+    color: #334155 !important;
+  }
+}
