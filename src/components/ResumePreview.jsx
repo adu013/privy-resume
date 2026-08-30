@@ -3,7 +3,7 @@ import PreviewHeader from "./preview/PreviewHeader";
 import PreviewExperience from "./preview/PreviewExperience";
 import PreviewProjects from "./preview/PreviewProjects";
 import PreviewEducation from "./preview/PreviewEducation";
-import PreviewReferences from "./preview/PreviewReferences";
+import PreviewReferences from "./preview/Previewreferences";
 
 export default function ResumePreview({ resumeData }) {
     const activeColor = resumeData.headlineColor || "#4f46e5";
