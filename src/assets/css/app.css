@@ -200,11 +200,21 @@ body {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  /* 👈 FORCES EXACTLY 3 COLUMNS ACROSS (Creates your perfect 3 x 2 grid) */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
   width: 100%;
   margin-top: 80px;
   text-align: left;
+}
+
+/* 📱 MOBILE RESPONSIVENESS LAYER
+   When the screen gets narrow (like a tablet or phone), collapse
+   the grid into a single column so the layout doesn't squish. */
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .feature-card {

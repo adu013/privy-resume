@@ -51,7 +51,10 @@ export default function LandingPage({ onStart }) {
           </svg>
         </button>
 
+        {/* FEATURES INFOGRAPHIC GRID */}
         <div className="features-grid">
+
+          {/* Card 1: Browser Storage Only */}
           <div className="feature-card">
             <div className="card-icon-box">
               <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -62,6 +65,7 @@ export default function LandingPage({ onStart }) {
             <p>Every keystroke is saved directly to your browser's local cache. Close the tab anytime; your progress stays safely on your computer.</p>
           </div>
 
+          {/* Card 2: Absolute Ownership */}
           <div className="feature-card">
             <div className="card-icon-box">
               <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -69,9 +73,10 @@ export default function LandingPage({ onStart }) {
               </svg>
             </div>
             <h3>Absolute Ownership</h3>
-            <p>Because there is no backend server, it is impossible for your data to leak in a data breach or be sold to third-party companies.</p>
+            <p>Because there is no backend server, it is impossible for your data to leak in a data breach or be sold to third-party tracking companies.</p>
           </div>
 
+          {/* Card 3: Local Data Exports */}
           <div className="feature-card">
             <div className="card-icon-box">
               <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -81,7 +86,42 @@ export default function LandingPage({ onStart }) {
             <h3>Local Data Exports</h3>
             <p>Export your details as a raw `.json` file to keep a backup on your hard drive. Load it back instantly whenever you want to update it.</p>
           </div>
+
+          {/* Card 4: Print & Download Ready */}
+          <div className="feature-card">
+            <div className="card-icon-box">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h6z" />
+              </svg>
+            </div>
+            <h3>Print & Download Ready</h3>
+            <p>Instantly convert your data into a professional PDF. Built-in style overrides automatically hide form controls and apply flawless page margins.</p>
+          </div>
+
+          {/* Card 5: No Account Required */}
+          <div className="feature-card">
+            <div className="card-icon-box">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+              </svg>
+            </div>
+            <h3>No Account Required</h3>
+            <p>Skip the sign-up screens, passwords, and verification emails. Start building your corporate resume immediately with zero onboarding friction.</p>
+          </div>
+
+          {/* Card 6: Zero Tracking Pixels */}
+          <div className="feature-card">
+            <div className="card-icon-box">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />
+              </svg>
+            </div>
+            <h3>Zero Tracking Pixels</h3>
+            <p>We do not track your clicks, use cookies, or bundle external data analytic frameworks. Your job hunting strategy remains completely anonymous.</p>
+          </div>
+
         </div>
+
       </main>
 
       <footer className="footer">
