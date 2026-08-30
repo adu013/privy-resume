@@ -1,0 +1,65 @@
+/* ==========================================================================
+   🖨️ PERFECT MODERN PRINT LAYOUT OVERRIDES (FIXES SQUISHING & COLUMN SPLITS)
+   ========================================================================== */
+@media print {
+  /* 1. Force the page container to stack the header and the lower columns top-to-bottom */
+  .a4-page.layout-modern {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 2. Force the contact block to take up a pristine 100% full width across the top */
+  .a4-page.layout-modern .resume-header {
+    width: 100% !important;
+    display: block !important;
+    text-align: center !important;
+    border-bottom: 2px solid #334155 !important;
+    padding-bottom: 12px !important;
+    margin: 0 0 10px 0 !important;
+  }
+
+  .a4-page.layout-modern .resume-name {
+    margin: 0 !important;
+    line-height: 1.1 !important;
+  }
+
+  .a4-page.layout-modern .resume-contact-row {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 16px !important;
+    margin-top: 6px !important;
+  }
+
+  /* 3. The lower content wrapper forces a side-by-side flex track on physical paper */
+  .a4-page.layout-modern .layout-modern-columns-wrapper {
+    display: flex !important;
+    flex-direction: row !important; /* 👈 Forces columns to stay side-by-side on paper sheets */
+    justify-content: space-between !important;
+    width: 100% !important;
+    gap: 24px !important;
+  }
+
+  /* Left sidebar locks to exactly 28% of the printable width */
+  .a4-page.layout-modern .layout-modern-left-col {
+    width: 28% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    border-right: 1px solid #cbd5e1 !important; /* Crisp divider line on paper */
+    padding-right: 16px !important;
+  }
+
+  /* Right main column locks to exactly 68% of the printable width */
+  .a4-page.layout-modern .layout-modern-right-col {
+    width: 68% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+}

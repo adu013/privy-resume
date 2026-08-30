@@ -11,12 +11,13 @@ export default function ResumePreview({ resumeData }) {
     <div className="preview-panel" style={{ "--accent-color": activeColor }}>
       <div className={`a4-page layout-${currentLayout}`}>
 
-        {/* Global Full-Width Contact Header */}
-        <PreviewHeader resumeData={resumeData} />
 
         {/* Dynamic Template Switcher */}
         {currentLayout === "classic" ? (
-          <ClassicLayout resumeData={resumeData} />
+          <>
+            <PreviewHeader resumeData={resumeData} />
+            <ClassicLayout resumeData={resumeData} />
+          </>
         ) : (
           <ModernLayout resumeData={resumeData} />
         )}

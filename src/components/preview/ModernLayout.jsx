@@ -1,46 +1,43 @@
 import React from "react";
+import PreviewHeader from "./PreviewHeader"; // 👈 Import the header component file
 import PreviewCompetencies from "./PreviewCompetencies";
 import PreviewSkills from "./PreviewSkills";
 import PreviewExperience from "./PreviewExperience";
 import PreviewProjects from "./PreviewProjects";
 import PreviewEducation from "./PreviewEducation";
-import PreviewReferences from "./PreviewReferences"; // Already imported
+import PreviewReferences from "./PreviewReferences";
 
 export default function ModernLayout({ resumeData }) {
   return (
-    <div className="layout-modern-columns-wrapper">
+    <>
+      {/* 🔒 ROW 1: Sits at the absolute top of the page stretching 100% width across the grid */}
+      <PreviewHeader resumeData={resumeData} />
 
-      {/* 📊 LEFT NARROW TRACK COLUMN */}
-      <div className="layout-modern-left-col">
-        <PreviewCompetencies resumeData={resumeData} isModern={true} />
-        <PreviewSkills resumeData={resumeData} isModern={true} />
+      {/* 🔒 ROW 2: The inner side-by-side column track wrapper container */}
+      <div className="layout-modern-columns-wrapper">
 
-        {/* 👈 FIXED: References now mounts cleanly at the bottom of the left sidebar */}
-        <PreviewReferences resumeData={resumeData} />
-      </div>
+        {/* 📊 LEFT NARROW TRACK COLUMN */}
+        <div className="layout-modern-left-col">
+          <PreviewCompetencies resumeData={resumeData} isModern={true} />
+          <PreviewSkills resumeData={resumeData} isModern={true} />
+          <PreviewReferences resumeData={resumeData} />
+        </div>
 
-      {/* 📊 RIGHT WIDER FOCUS TRACK COLUMN */}
-      <div className="layout-modern-right-col">
+        {/* 📊 RIGHT WIDER FOCUS TRACK COLUMN */}
+        <div className="layout-modern-right-col">
+          {resumeData.summary && (
+            <div>
+              <h4 className="resume-section-title">Summary</h4>
+              <p className="resume-text" style={{ fontSize: "12.5px" }}>{resumeData.summary}</p>
+            </div>
+          )}
 
-        {/* Executive Profile Summary */}
-        {resumeData.summary && (
-          <div>
-            <h4 className="resume-section-title">Summary</h4>
-            <p className="resume-text" style={{ fontSize: "12.5px" }}>{resumeData.summary}</p>
-          </div>
-        )}
-
-        {/* Professional Work History Positions */}
-        <PreviewExperience resumeData={resumeData} />
-
-        {/* Engineering Projects Layer */}
-        <PreviewProjects resumeData={resumeData} />
-
-        {/* Engineering Education Layer */}
-        <PreviewEducation resumeData={resumeData} />
+          <PreviewExperience resumeData={resumeData} />
+          <PreviewProjects resumeData={resumeData} />
+          <PreviewEducation resumeData={resumeData} />
+        </div>
 
       </div>
-
-    </div>
+    </>
   );
 }
