@@ -1,97 +1,118 @@
-# 🔒 PrivyResume
+# 🔒 PrivyResume (v1.2.1)
 
-PrivyResume is a 100% client-side, serverless, and privacy-first resume builder. It runs entirely inside the user's web browser, meaning sensitive work history, contact details, and personal data stay locked on their computer and never touch an external server.
+PrivyResume is a production-ready, open-source, **100% serverless, client-side resume workbench engine**. Built explicitly for security-conscious software engineers, developers, and tech professionals, it compiles standard Markdown-ready background fields into beautiful, ATS-optimized, high-density resumes without exposing personal metadata to tracking databases.
 
-Built for maximum efficiency, total data ownership, and complete offline capability.
+🚀 **Live Production Workspace:** [https://privy-resume.traxrep.com](https://://traxrep.com/)
 
----
-
-## 🚀 Key Features & Unique Selling Point (USP)
-
-* **Zero Server Architecture:** No remote tracking, no login requirements, and no remote databases. Absolute data protection.
-* **Browser Memory Engine:** Every keystroke is saved directly into the browser's local storage cache automatically. Work is preserved even if the tab is accidentally closed.
-* **Structured Multi-Page Wizard:** Form inputs are split across 10 clean, navigable step-by-step panel categories for stress-free data entry.
-* **Dynamic Multi-Item Arrays:** Supports adding infinite entries for jobs, projects, degrees, certifications, skills, and references.
-* **Branded Custom PDF Engine:** Renders high-utility, standard corporate resumes in professional Helvetica font with locked 20mm margins on all pages.
-* **Data Portability:** Users can back up their details onto their local drive by exporting a raw `.json` file, and reload it back into the app instantly.
-* **Optional Watermark Toggle:** Includes an unselectable branding notice at the footer that users can switch off with a clean checkbox.
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org)
+![Node version](https://img.shields.io/badge/node.js-339933)
+![React Version](https://img.shields.io/badge/-ReactJs-61DAFB)
+[![Pages Build Status](https://cloudflare.com)](https://pages.dev)
 
 ---
 
-## 🛠️ Built With
+## 🛠️ Core Architectural Philosophy
 
-* **React** – Component-driven front-end framework.
-* **Vite** – Fast, local compilation and bundling engine.
-* **Native JavaScript & CSS** – Written purely with standard web APIs to ensure zero package breaking points and 100% offline predictability.
+Traditional resume builders process candidate data on remote servers, opening windows for unauthorized profile tracking, search engine caching, and data harvesting. PrivyResume runs entirely in your local runtime memory context:
+
+* **Zero External Databases:** Data is stored locally using standard browser `localStorage` slots. It never crosses the network array.
+* **Bi-Directional JSON Hub:** Complete workflow autonomy. Users can download their raw background state metrics as a localized `.json` backup file and re-import it instantly later to seed the configuration panel from an absolute blank slate.
+* **Segregated Multi-Template Engine:** Decoupled UI routing layers isolate separate display parameters, ensuring layout adjustments inside a template never leak properties or corrupt alternate views.
 
 ---
 
-## 📂 Project Architecture
+## 💎 Advanced Features Engine
 
-The application uses a highly modular, decoupled component tree to ensure effortless debugging and seamless scaling:
+* **11-Step Modular Setup Wizard:** Covers everything from basic Identification, Executive Profiles, History, Education, and Certifications, up to technical Project blocks, Custom Reference tracks, and an isolated *Awards & Achievements* module.
+* **Instant Dynamic Theme Color Picker:** Injects CSS custom properties dynamically, allowing real-time, on-screen adjustments to headline accents and borders.
+* **Multi-Template Toggle System:**
+  * `📄 Classic View`: Traditional, single-column stacked chronological layout designed for high-density reading in standard corporate environments.
+  * `📊 Modern Split View`: Tech-focused, multi-column corporate look that pushes fast-lookup technical metrics (Skills, Competencies, References) into a clean left sidebar, leaving the main wider track free to detail heavy employment narratives.
+* **Toggleable Branding Watermark Footer:** An isolated, global full-width canvas component that can be toggled on or off via checkbox inputs.
+
+---
+
+## 🖨️ Engineered Print Layout Sinc (Firefox Optimized)
+
+Most template engines collapse during PDF export due to how print sub-systems interpret responsive web layouts. PrivyResume bypasses these limitations using explicit **millimeter tracking grids (`mm`)** and **Percentage-Based Flexbox boundaries** mapped into isolated layout sheets:
+
+* **Strict WYSIWYG Mirroring:** Media query definitions strip away app dashboard sidebars and sync paper parameters to an exact physical **A4 standard portrait canvas (210mm x 297mm)**.
+* **Firefox Print Engine Patch:** Leverages CSS `display: contents !important;` to bypass known Firefox print engine margin compression bugs, keeping headers full-width and layout sidebars perfectly side-by-side on paper sheets.
+* **Safe Page-Break Controls:** Embedded `page-break-inside: avoid !important;` logic prevents individual paragraph lines, list elements, or section headings from splitting in half at page margins.
+
+---
+
+## 🏗️ Folder Directory Structure
+
+The repository is built to follow a strict modular, component-driven structural hierarchy:
 
 ```text
-privy-resume/
-├── src/
-│   ├── assets/
-│   │   └── css/
-│   │       ├── app.css         # Main theme wrapper, landing page & forms UI
-│   │       ├── preview.css     # On-screen A4 document sheet text typography
-│   │       └── print.css       # Native @media print overrides for clean PDFs
-│   ├── components/
-│   │   ├── preview/            # Isolated document preview chunks
-│   │   │   ├── PreviewEducation.jsx
-│   │   │   ├── PreviewExperience.jsx
-│   │   │   ├── PreviewHeader.jsx
-│   │   │   ├── PreviewProjects.jsx
-│   │   │   └── PreviewReferences.jsx
-│   │   ├── CertificationForm.jsx
-│   │   ├── CompetenciesForm.jsx
-│   │   ├── ContactForm.jsx
-│   │   ├── EducationForm.jsx
-│   │   ├── ExperienceForm.jsx
-│   │   ├── LandingPage.jsx
-│   │   ├── LinksForm.jsx
-│   │   ├── ProjectForm.jsx
-│   │   ├── ReferencesForm.jsx
-│   │   ├── ResumePreview.jsx  # Orchestrates preview layouts
-│   │   ├── SkillsForm.jsx
-│   │   └── Workspace.jsx      # Orchestrates wizard steps and controls
-│   ├── App.jsx                # Main controller hub for state & file logic
-│   └── main.jsx               # Global asset registration file
+src/
+├── assets/
+│   └── css/
+│       ├── app.css              # Main web app layout & landing framework
+│       ├── preview.css          # Shared interactive onscreen preview settings
+│       ├── print.css            # Base global printable settings & overrides
+│       ├── layout-classic.css   # Onscreen Classic stacked styling rules
+│       ├── layout-modern.css    # Onscreen Modern 2-column sidebar rules
+│       ├── print-classic.css    # Isolated printable Classic rules
+│       └── print-modern.css    # Isolated printable Modern sidebar rules
+├── components/
+│   ├── Workspace.jsx            # Main app workflow layout orchestrator
+│   ├── ResumePreview.jsx        # Top-level preview wrapper shell
+│   ├── ContactForm.jsx          # Setup wizard panel forms ...
+│   ├── AwardsForm.jsx           # Section 11 form inputs processor
+│   └── preview/                 # Decoupled presentation layout files
+│       ├── ClassicLayout.jsx    # Classic rendering node
+│       ├── ModernLayout.jsx     # Modern 2-column rendering node
+│       ├── PreviewHeader.jsx    # Full-width centered identity header
+│       ├── PreviewCompetencies.jsx
+│       ├── PreviewSkills.jsx
+│       ├── PreviewReferences.jsx
+│       └── PreviewBranding.jsx  # Global full-width watermark badge
+└── main.jsx                     # Global assets index registration pipeline
 ```
 
 ---
 
-## ⚡ Quick Start Guide
+## 🚀 Local Installation & Developer Workflow
 
-To run PrivyResume locally on your computer, ensure you have **Node.js** and **npm** installed, then execute these commands in your terminal:
+To clone this repository and spin up a local development workbench sandbox environment on your machine:
 
 ```bash
-# 1. Clone or download your repository and move inside the workspace
+# 1. Clone the open-source repository
+git clone https://github.com/adu013/privy-resume.git
+
+# 2. Step inside the root project directory
 cd privy-resume
 
-# 2. Install React's internal components locally
+# 3. Install the required Node dependencies package stream
 npm install
 
-# 3. Spin up the local offline development server
+# 4. Boot up the local Vite hot-reloading development server
 npm run dev
 ```
 
-Open `http://localhost:5173` in your browser to build your private resume!
+Open `http://localhost:5173` in your browser to begin testing modifications.
+
+### Compiling Production-Ready Assets
+To compress JavaScript modules, tree-shake dead code lines, and compile clean stylesheets for live distribution:
+```bash
+npm run build
+```
+Output build files compile safely straight inside the localized `/dist` folder.
 
 ---
 
-## 🖨️ PDF Generation Checklist
+## ☁️ Continuous Automated Deployment
 
-When exporting your resume using the **Download PDF / Print** button, match these configuration selections inside your browser's native window for the best results:
-1. **Destination:** Save as PDF
-2. **Margins:** Default *(Our custom style sheets manage the 20mm margins explicitly)*
-3. **Headers & Footers:** Uncheck *(Strips away local file paths and website metadata rows)*
+This project uses an automated CI/CD pipeline integrated directly with **Cloudflare Pages**:
+* Every code push or merge event targeting the `main` branch triggers an immediate cloud-side compilation.
+* Builds execute using the environment flag configuration **`NODE_VERSION: 20`** to support Vite's asset packing pipeline requirements.
+* Built production directories deploy instantly onto a secure, edge-network production domain environment within seconds.
 
 ---
 
-## ✍️ Credits
+## 📄 License & Compliance
 
-* **Core Application Architecture & Logic:** Designed and engineered by me, a privacy-focused developer, building tools that put users back in control of their private files.
-* **Technical Engineering Assistant:** Collaboratively architected, modularized, and refined in real time alongside my helpful AI Peer (Gemini).
+Distributed under the **MIT License**. See the `LICENSE` file in the root folder directory for more details. Copyright (c) 2026 Privy Resume.
