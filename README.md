@@ -7,7 +7,7 @@ PrivyResume is a production-ready, open-source, **100% serverless, client-side r
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org)
 ![Node version](https://img.shields.io/badge/node.js-339933)
 ![React Version](https://img.shields.io/badge/-ReactJs-61DAFB)
-[![Pages Build Status](https://cloudflare.com)](https://pages.dev)
+[![Cloudflare Build Badge](https://cloudflare-build-badge.xeffen25.com/Xeffen25/cloudflare-build-badge/status.svg)](https://cloudflare-build-badge.xeffen25.com/Xeffen25/cloudflare-build-badge/status.svg)
 
 ---
 
