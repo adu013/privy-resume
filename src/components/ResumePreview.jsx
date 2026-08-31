@@ -1,5 +1,6 @@
 import React from "react";
 import PreviewHeader from "./preview/PreviewHeader";
+import PreviewBranding from "./preview/PreviewBranding";
 import ClassicLayout from "./preview/ClassicLayout"; // 👈 Imported separately
 import ModernLayout from "./preview/ModernLayout";   // 👈 Imported separately
 
@@ -17,11 +18,14 @@ export default function ResumePreview({ resumeData }) {
           <>
             <PreviewHeader resumeData={resumeData} />
             <ClassicLayout resumeData={resumeData} />
+            <PreviewBranding resumeData={resumeData} isModern={currentLayout === "modern"} />
+
           </>
         ) : (
         <>
           <PreviewHeader resumeData={resumeData} />
           <ModernLayout resumeData={resumeData} />
+          <PreviewBranding resumeData={resumeData} isModern={currentLayout === "modern"} />
         </>
         )}
 
