@@ -52,19 +52,20 @@
 }
 
 .resume-section-title {
-  font-size: 13px;
+  font-size: calc(var(--resume-font-size, 13px) + 0.5px) !important;  /* dynamic font size (calculated) */
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--accent-color, #4f46e5);
   border-bottom: 1px solid #cbd5e1;
   padding-bottom: 2px;
-  margin-bottom: 8px;
+  margin-top: var(--resume-section-margin, 12px) !important;                /* dynacmic top margin */
+  margin-bottom: calc(var(--resume-section-margin, 12px) * 0.6) !important; /* dynacmic bottom margin calculated */
 }
 
 .resume-text {
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: var(--resume-font-size, 13px) !important;    /* dynamic font size */
+  line-height: var(--resume-line-height, 1.6) !important; /* dynamic line height */
   color: #334155;
   white-space: pre-line;
 }

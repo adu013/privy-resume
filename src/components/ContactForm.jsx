@@ -1,5 +1,6 @@
 import React from "react";
 import ColorPicker from "./ColorPicker";
+import DensitySliders from "./DensitySlider";
 import FontSwitcher from "./FontSwitcher";
 import LayoutSwitcher from "./LayoutSwitcher";
 
@@ -46,6 +47,9 @@ export default function ContactForm({ resumeData, onInputChange }) {
 
       {/* Font Switcher */}
       <FontSwitcher resumeData={resumeData} onInputChange={onInputChange} />
+
+      {/* Density Slider */}
+      <DensitySliders resumeData={resumeData} onInputChange={onInputChange} />
 
       {/* PrivyResume branding toggle box */}
       <div style={{

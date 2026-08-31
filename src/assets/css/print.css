@@ -55,18 +55,24 @@
     font-family: var(--resume-font, "Helvetica Neue", Helvetica, Arial, sans-serif) !important;
   }
 
-  /* ==========================================================================
-     🛡️ SAFE PAGE-BREAK PROTECTION (WITHOUT ALTERING SPACING)
-     ========================================================================== */
+  /* ===========================================================================
+     SAFE PAGE-BREAK PROTECTION (WITHOUT ALTERING SPACING)
+     =========================================================================== */
 
   /* Prevent text strings or bullets from cutting in half mid-line */
   .resume-text, p, li, ul {
+    font-size: var(--resume-font-size, 13px) !important;
+    line-height: var(--resume-line-height, 1.5) !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
 
   /* Prevent standalone headings from hanging at the bottom of a sheet */
   .resume-section-title {
+    font-size: calc(var(--resume-font-size, 13px) + 0.5px) !important;
+    color: var(--accent-color, #111111) !important;
+    margin-top: var(--resume-section-margin, 12px) !important;
+    margin-bottom: calc(var(--resume-section-margin, 12px) * 0.6) !important;
     page-break-after: avoid !important;
     break-after: avoid !important;
   }
