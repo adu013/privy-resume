@@ -50,6 +50,9 @@
     width: 100% !important;
     min-height: auto !important;
     padding: 0 !important; /* Prevent compounding margin issues */
+
+    /* Change the font dynamically */
+    font-family: var(--resume-font, "Helvetica Neue", Helvetica, Arial, sans-serif) !important;
   }
 
   /* ==========================================================================

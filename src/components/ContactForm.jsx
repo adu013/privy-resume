@@ -1,5 +1,6 @@
 import React from "react";
 import ColorPicker from "./ColorPicker";
+import FontSwitcher from "./FontSwitcher";
 import LayoutSwitcher from "./LayoutSwitcher";
 
 export default function ContactForm({ resumeData, onInputChange }) {
@@ -43,7 +44,10 @@ export default function ContactForm({ resumeData, onInputChange }) {
       {/* Layout Switcher */}
       <LayoutSwitcher resumeData={resumeData} onInputChange={onInputChange} />
 
-           {/* 👈 NEW PRIVYRESUME BRANDING TOGGLE BOX */}
+      {/* Font Switcher */}
+      <FontSwitcher resumeData={resumeData} onInputChange={onInputChange} />
+
+      {/* PrivyResume branding toggle box */}
       <div style={{
         marginTop: "20px",
         display: "flex",
