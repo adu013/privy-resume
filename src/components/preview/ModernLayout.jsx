@@ -1,5 +1,6 @@
 import React from "react";
-import PreviewHeader from "./PreviewHeader"; // 👈 Import the header component file
+import PreviewAwards from "./PreviewAwards";
+import PreviewHeader from "./PreviewHeader";
 import PreviewCompetencies from "./PreviewCompetencies";
 import PreviewSkills from "./PreviewSkills";
 import PreviewExperience from "./PreviewExperience";
@@ -35,6 +36,7 @@ export default function ModernLayout({ resumeData }) {
           <PreviewExperience resumeData={resumeData} />
           <PreviewProjects resumeData={resumeData} />
           <PreviewEducation resumeData={resumeData} />
+          <PreviewAwards resumeData={resumeData} />
         </div>
 
       </div>

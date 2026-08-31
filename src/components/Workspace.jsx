@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AwardsForm from "./AwardsForm";
 import ContactForm from "./ContactForm";
 import SummaryForm from "./SummaryForm";
 import CompetenciesForm from "./CompetenciesForm";
@@ -22,11 +23,11 @@ export default function Workspace({
   // Array of step names for our clickable navigation bar
   const stepTabs = [
     "Identity", "Profile", "Compentencies","History", "Degrees",
-    "Certs", "Projects", "Skills", "Links", "References"
+    "Certs", "Projects", "Skills", "Links", "References", "Awards"
   ];
 
   const handleNext = () => {
-    if (currentStep < 10) setCurrentStep(currentStep + 1);
+    if (currentStep < 11) setCurrentStep(currentStep + 1);
   };
 
   const handlePrev = () => {
@@ -172,6 +173,12 @@ export default function Workspace({
               />
             )}
 
+            {currentStep === 11 && (
+              <AwardsForm
+                resumeData={resumeData} onInputChange={onInputChange}
+                onAddItem={onAddItem} onRemoveItem={onRemoveItem} />
+            )}
+
           </div>
 
           {/* SIDEBAR LOWER ACTION STEP CONTROLLERS */}
@@ -183,7 +190,7 @@ export default function Workspace({
               ← Previous Section
             </button>
 
-            {currentStep < 10 ? (
+            {currentStep < 11 ? (
               <button
                 onClick={handleNext}
                 style={{ padding: "10px 20px", background: "linear-gradient(to right, #9333ea, #4f46e5)", color: "white", border: "none", borderRadius: "8px", fontWeight: "700", cursor: "pointer" }}
@@ -192,7 +199,7 @@ export default function Workspace({
               </button>
             ) : (
               <div style={{ color: "#10b981", fontSize: "14px", fontWeight: "700" }}>
-                ✓ All 9 Sections Complete!
+                ✓ All 11 Sections Complete!
               </div>
             )}
           </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import PreviewAwards from "./PreviewAwards";
 import PreviewExperience from "./PreviewExperience";
 import PreviewProjects from "./PreviewProjects";
 import PreviewEducation from "./PreviewEducation";
@@ -20,6 +21,7 @@ export default function ClassicLayout({ resumeData }) {
       <PreviewExperience resumeData={resumeData} />
       <PreviewProjects resumeData={resumeData} />
       <PreviewEducation resumeData={resumeData} />
+      <PreviewAwards resumeData={resumeData} />
       <PreviewSkills resumeData={resumeData} isModern={false} />
       <PreviewReferences resumeData={resumeData} />
     </>

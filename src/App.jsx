@@ -35,9 +35,12 @@ export default function App() {
     otherLinks: [
       { label: "", url: "" }
     ],
-    references: [
-      { name: "", title: "", company: "", contact: "" }
-    ],
+
+    // References
+    references: [{ name: "", title: "", company: "", contact: "" }],
+
+    // Awards
+    awards: [{ title: "", issuer: "", date: "", summary: "" }],
 
     // Layout
     selectedLayout: "classic",
