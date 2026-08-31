@@ -1,20 +1,20 @@
 /* ==========================================================================
-   🖨️ Isolated Classic Print Styles (1 Column)
+   🖨️ CLASSIC PRINT OVERRIDES (COPIES PREVIEW EXACTLY)
    ========================================================================== */
 @media print {
-  .a4-page.layout-classic {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 24px !important;
-  }
+.a4-page.layout-classic {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+}
 
-  .layout-classic .resume-header {
-    text-align: center !important;
-    border-bottom: 2px solid #334155 !important;
-    padding-bottom: 12px !important;
-  }
+.layout-classic .resume-header {
+  text-align: center;
+  border-bottom: 2px solid #334155;
+  padding-bottom: 12px;
+}
 
-  .layout-classic .resume-contact-row {
-    justify-content: center !important;
-  }
+.layout-classic .resume-contact-row {
+  justify-content: center;
+}
 }

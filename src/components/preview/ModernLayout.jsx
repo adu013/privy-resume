@@ -11,7 +11,7 @@ export default function ModernLayout({ resumeData }) {
   return (
     <>
       {/* 🔒 ROW 1: Sits at the absolute top of the page stretching 100% width across the grid */}
-      <PreviewHeader resumeData={resumeData} />
+      {/* <PreviewHeader resumeData={resumeData} /> */}
 
       {/* 🔒 ROW 2: The inner side-by-side column track wrapper container */}
       <div className="layout-modern-columns-wrapper">

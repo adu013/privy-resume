@@ -1,7 +1,8 @@
 /* ==========================================================================
-   🖨️ SHARED PRINT BASE SETTINGS (NO INDIVIDUAL LAYOUT RULES)
+   🖨️ SHARED PRINT BASE SETTINGS (WYSIWYG SYSTEM RESETS)
    ========================================================================== */
 @media print {
+  /* 1. Force all background layers to expand 100% and adopt crisp white text layouts */
   body,
   .landing-page,
   .workspace-container,
@@ -20,43 +21,91 @@
     width: 100% !important;
   }
 
-  /* Hide app dashboard headers, sliders, and form sidebars from the printer */
+  /* 2. HIDES THE APP DASHBOARD HEADERS, SLIDERS, AND SIDEBAR FORMS FROM THE PRINTER */
   .workspace-header,
   .form-panel,
   .header,
   .footer,
-  .glow-container {
+  .glow-container,
+  button,
+  input[type="checkbox"],
+  label {
     display: none !important;
   }
 
+  /* 3. THE MAGIC RESET: Sets margins to 0 so your perfect screen layout
+        can expand and control the sizing on the paper naturally */
   @page {
     size: A4 portrait;
-    margin: 20mm !important; /* Locks crisp margins on every printed page sheet */
+    margin: 0 !important;
   }
 
-  .a4-page {
-    box-shadow: none !important;
-    border: none !important;
-    border-radius: 0 !important;
-    background: #ffffff !important;
-    color: #1e293b !important;
-    overflow: visible !important;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
+/* ==========================================================================
+   🖥️ INTERACTIVE ONSCREEN RESUME PREVIEW PANEL (SHARED BASE SETTINGS)
+   ========================================================================== */
+.preview-panel {
+  padding: 32px;
+  overflow-y: auto;
+  background-color: #0b1329;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
 
-  /* Prevent text lines from getting sliced in half at page breaks */
-  .a4-page > div,
-  .a4-page ul,
-  .a4-page li {
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
+.a4-page {
+  width: 100%;
+  max-width: 210mm;
+  min-height: 297mm;
+  background-color: white;
+  color: #1e293b;
+  padding: 40px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
-  .resume-section-title {
-    color: var(--accent-color, #111111) !important;
-    page-break-after: avoid !important;
-    break-after: avoid !important;
-  }
+/* Look for this class in preview.css and update it to match this exactly: */
+.resume-header {
+  width: 100% !important; /* 👈 THE CORE FORCE FIX */
+  display: block !important;
+  text-align: center;
+  border-bottom: 2px solid #334155;
+  padding-bottom: 12px;
+}
+
+
+.resume-name {
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.resume-contact-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #475569;
+}
+
+.resume-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-color, #4f46e5);
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 2px;
+  margin-bottom: 8px;
+}
+
+.resume-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #334155;
+  white-space: pre-line;
+}
 }

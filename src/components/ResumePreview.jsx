@@ -19,7 +19,10 @@ export default function ResumePreview({ resumeData }) {
             <ClassicLayout resumeData={resumeData} />
           </>
         ) : (
+        <>
+          <PreviewHeader resumeData={resumeData} />
           <ModernLayout resumeData={resumeData} />
+        </>
         )}
 
       </div>
