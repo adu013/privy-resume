@@ -1,8 +1,8 @@
 /* ==========================================================================
-   🖨️ SHARED PRINT BASE SETTINGS (WYSIWYG SYSTEM RESETS)
+   🖨️ SHARED PRINT BASE SETTINGS (CLEAN STRUCTURAL BASE)
    ========================================================================== */
 @media print {
-  /* 1. Force all background layers to expand 100% and adopt crisp white text layouts */
+  /* 1. Global Viewport Reset */
   body,
   .landing-page,
   .workspace-container,
@@ -21,91 +21,59 @@
     width: 100% !important;
   }
 
-  /* 2. HIDES THE APP DASHBOARD HEADERS, SLIDERS, AND SIDEBAR FORMS FROM THE PRINTER */
+  /* 2. Hide Dashboard Controls from Print Engine */
   .workspace-header,
   .form-panel,
   .header,
   .footer,
   .glow-container,
   button,
-  input[type="checkbox"],
+  input,
   label {
     display: none !important;
   }
 
-  /* 3. THE MAGIC RESET: Sets margins to 0 so your perfect screen layout
-        can expand and control the sizing on the paper naturally */
+  /* 3. Paper Margin Bounds Reset */
   @page {
     size: A4 portrait;
-    margin: 0 !important;
+    margin: 20mm !important; /* Standard printable margins cushion area */
   }
 
-/* ==========================================================================
-   🖥️ INTERACTIVE ONSCREEN RESUME PREVIEW PANEL (SHARED BASE SETTINGS)
-   ========================================================================== */
-.preview-panel {
-  padding: 32px;
-  overflow-y: auto;
-  background-color: #0b1329;
-  display: flex;
-  justify-content: center;
-  align-items: start;
-}
+  /* 4. Base Page Container Configuration */
+  .a4-page {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: #ffffff !important;
+    color: #1e293b !important;
+    overflow: visible !important;
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 0 !important; /* Prevent compounding margin issues */
+  }
 
-.a4-page {
-  width: 100%;
-  max-width: 210mm;
-  min-height: 297mm;
-  background-color: white;
-  color: #1e293b;
-  padding: 40px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
+  /* ==========================================================================
+     🛡️ SAFE PAGE-BREAK PROTECTION (WITHOUT ALTERING SPACING)
+     ========================================================================== */
 
-/* Look for this class in preview.css and update it to match this exactly: */
-.resume-header {
-  width: 100% !important; /* 👈 THE CORE FORCE FIX */
-  display: block !important;
-  text-align: center;
-  border-bottom: 2px solid #334155;
-  padding-bottom: 12px;
-}
+  /* Prevent text strings or bullets from cutting in half mid-line */
+  .resume-text, p, li, ul {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
 
+  /* Prevent standalone headings from hanging at the bottom of a sheet */
+  .resume-section-title {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
 
-.resume-name {
-  font-size: 28px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #0f172a;
-  margin-bottom: 6px;
-}
-
-.resume-contact-row {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  font-size: 12px;
-  color: #475569;
-}
-
-.resume-section-title {
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--accent-color, #4f46e5);
-  border-bottom: 1px solid #cbd5e1;
-  padding-bottom: 2px;
-  margin-bottom: 8px;
-}
-
-.resume-text {
-  font-size: 13px;
-  line-height: 1.6;
-  color: #334155;
-  white-space: pre-line;
-}
+  /* Clean section tracking push rules */
+  .experience-item,
+  .project-item,
+  .education-item,
+  .reference-item {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
 }
