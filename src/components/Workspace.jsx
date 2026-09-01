@@ -18,7 +18,8 @@ export default function Workspace({
   resumeData, onInputChange, onClearForm, onBack, onAddItem, onRemoveItem,
   onAddHighlight, onRemoveHighlight, onAddProjHighlight, onRemoveProjHighlight,
   onAddSkillHighlight, onRemoveSkillHighlight,
-  onExportJSON, onImportJSON
+  onExportJSON, onImportJSON,
+  onShareDeepLink,
 }) {
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -83,6 +84,27 @@ export default function Workspace({
             >
               🖨️ Download PDF / Print
             </button>
+
+            {/** Share Button */}
+            <button
+              onClick={onShareDeepLink}
+              style={{
+                padding: "6px 12px",
+                backgroundColor: "#065f46", // Deep jade emerald green color
+                color: "#a7f3d0",
+                border: "1px solid #047857",
+                borderRadius: "6px",
+                cursor: "pointer",
+                fontSize: "12px",
+                fontWeight: "600",
+                transition: "all 0.2s"
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = "#047857"}
+              onMouseLeave={(e) => e.target.style.backgroundColor = "#065f46"}
+            >
+              🔗 Share Link
+            </button>
+
             <button className="btn-danger" onClick={onClearForm}>Reset Data</button>
             <button className="btn-secondary" onClick={onBack}>← Exit</button>
           </div>

@@ -89,7 +89,8 @@ export default function App() {
     addProjectHighlight, removeProjectHighlight,
     addSkillHighlight, removeSkillHighlight,
     handleExportJSON, handleImportJSON,
-    handleSwitchProfile, handleCreateProfile, handleDeleteProfile
+    handleSwitchProfile, handleCreateProfile, handleDeleteProfile,
+    handleShareDeepLink
   } = useProfiles(blankResumeBlueprint, triggerToast);
 
   return (
@@ -110,6 +111,7 @@ export default function App() {
             onRemoveSkillHighlight={removeSkillHighlight}
             onExportBackup={handleExportJSON}
             onImportBackup={handleImportJSON}
+            onShareDeepLink={handleShareDeepLink}
 
             profiles={profiles}
             activeProfileName={activeProfileName}

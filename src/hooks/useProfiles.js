@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
+import { compressData, decompressData } from "../utils/urlCOmpactor";
 
 export function useProfiles(blankBlueprint, triggerToast) {
-  // 1. Initialise Active Profile Name Tracking
+  // Initialise Active Profile Name Tracking
   const [activeProfileName, setActiveProfileName] = useState(() => {
     return localStorage.getItem("privy_active_profile_name") || "Default Profile";
   });
 
-  // 2. Initialise Master Profiles Dictionary
+  // Initialise Master Profiles Dictionary
   const [profiles, setProfiles] = useState(() => {
     const savedProfiles = localStorage.getItem("privy_all_profiles_cache");
     if (savedProfiles) {
@@ -21,16 +22,44 @@ export function useProfiles(blankBlueprint, triggerToast) {
     return { "Default Profile": baselineData };
   });
 
-  // 3. Derived Active Workspace Profile Data Selection
+  // Derived Active Workspace Profile Data Selection
   const resumeData = profiles[activeProfileName] || blankBlueprint;
 
-  // 4. Synchronise State Elements to Persistent Browser Caches
+  // URL Hash Listener State
+  useEffect(() => {
+    const handleInboundHash = async () => {
+      const hash = window.location.hash;
+      if (hash.startsWith("#share=")) {
+        const token = hash.replace("#share=", "");
+        if (!token) return;
+
+        const parsedData = await decompressData(token);
+        if (parsedData && typeof parsedData === "object") {
+          const sharedName = `Shared (${parsedData.fullName || "Portfolio"})`;
+
+          setProfiles(prev => ({
+            ...prev,
+            [sharedName]: parsedData
+          }));
+          setActiveProfileName(sharedName);
+
+          // Strip hash parameters out cleanly from the browser address bar bar for clean hygiene
+          window.history.replaceState(null, "", window.location.pathname);
+          triggerToast("✨ Shared data profile loaded completely offline via deep-link!");
+        }
+      }
+    };
+
+    handleInboundHash();
+  }, []);
+
+  // Synchronise State Elements to Persistent Browser Caches
   useEffect(() => {
     localStorage.setItem("privy_all_profiles_cache", JSON.stringify(profiles));
     localStorage.setItem("privy_active_profile_name", activeProfileName);
   }, [profiles, activeProfileName]);
 
-  // 5. Profile Switching, Factory Creation, and Deletion Closures
+  // Profile Switching, Factory Creation, and Deletion Closures
   const handleSwitchProfile = (name) => {
     if (profiles[name]) {
       setActiveProfileName(name);
@@ -69,7 +98,7 @@ export function useProfiles(blankBlueprint, triggerToast) {
     triggerToast(`✓ Profile "${name}" removed cleanly.`);
   };
 
-  // 6. Flexible Nested Form Value Mutation Input Handlers
+  // Flexible Nested Form Value Mutation Input Handlers
   const handleInputChange = (e, index = null, arrayName = null, subIndex = null) => {
     const { name, value, type, checked } = e.target || {};
     const targetName = name || e.target?.getAttribute("name");
@@ -97,7 +126,7 @@ export function useProfiles(blankBlueprint, triggerToast) {
     });
   };
 
-  // 7. Core Repeatable List Append Operators
+  // Core Repeatable List Append Operators
   const addArrayItem = (arrayName, emptyBlueprint) => {
     setProfiles((prev) => {
       const currentProfileData = { ...prev[activeProfileName] };
@@ -138,7 +167,7 @@ export function useProfiles(blankBlueprint, triggerToast) {
     });
   };
 
-  // 8. Offline JSON File Export Backup Streams
+  // Offline JSON File Export Backup Streams
   const handleExportJSON = () => {
     const dataStr = JSON.stringify(resumeData, null, 2);
     const blob = new Blob([dataStr], { type: "application/json" });
@@ -153,7 +182,7 @@ export function useProfiles(blankBlueprint, triggerToast) {
     triggerToast("📥 Data profile exported! JSON backup file downloaded successfully.");
   };
 
-  // 8. Offline JSON File Export Backup Streams
+  // Offline JSON File Export Backup Streams
   const handleImportJSON = (e) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
@@ -173,6 +202,26 @@ export function useProfiles(blankBlueprint, triggerToast) {
     e.target.value = "";
   };
 
+  // Expose sharing utility:
+  const handleShareDeepLink = async () => {
+    const compressed = await compressData(resumeData);
+    if (!compressed) {
+      triggerToast("❌ Failed to compress resume link data.", "error");
+      return;
+    }
+
+    // Construct the URL using the hash parameter fragment strategy
+    const shareUrl = `${window.location.origin}${window.location.pathname}#share=${compressed}`;
+
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      triggerToast("🔗 Sharable link copied to clipboard! Database-free.");
+    } catch (err) {
+      console.error("Clipboard copy failed:", err);
+      triggerToast("❌ Clipboard access denied. Copy link manually.", "error");
+    }
+  };
+
   return {
     resumeData, profiles, activeProfileName,
     handleInputChange, addArrayItem, removeArrayItem,
@@ -182,6 +231,7 @@ export function useProfiles(blankBlueprint, triggerToast) {
     removeProjectHighlight: (pIdx, hIdx) => removeHighlightHelper("projects", pIdx, hIdx),
     addSkillHighlight: (idx) => addHighlightHelper("skillsList", idx),
     removeSkillHighlight: (sIdx, hIdx) => removeHighlightHelper("skillsList", sIdx, hIdx),
+    handleShareDeepLink,
     handleExportJSON, handleImportJSON,
     handleSwitchProfile, handleCreateProfile, handleDeleteProfile
   };
