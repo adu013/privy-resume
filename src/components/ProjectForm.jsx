@@ -33,6 +33,17 @@ export default function ProjectForm({
                 onChange={(e) => onInputChange(e, projIdx, "projects")} placeholder="E-Commerce Offline Engine" className="form-input"
               />
             </div>
+            <div className="input-group" style={{ gridColumn: "1 / -1", marginTop: "10px" }}>
+              <label className="input-label">Project URL / GitHub Link</label>
+              <input
+                type="url"
+                name="projectLink"
+                value={proj.projectLink || ""}
+                onChange={(e) => onInputChange(e, projIdx, "projects")}
+                placeholder="https://github.com/username/projects"
+                className="form-input"
+              />
+            </div>
             <div className="input-group" style={{ marginTop: "10px" }}>
               <label className="input-label">Start Mon-Year</label>
               <input

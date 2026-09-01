@@ -19,7 +19,32 @@ export default function PreviewProjects({ resumeData }) {
         return (
           <div key={idx} style={{ marginBottom: "12px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start" }}>
-              <div><strong style={{ fontSize: "14px", color: "#0f172a" }}>{proj.name}</strong></div>
+
+              {/** Project Link */}
+              <div>
+                <strong style={{ fontSize: "14px", color: "#0f172a" }}>{proj.name}</strong>
+
+                {/* Only render the URL segment if projectLink text actually exists */}
+                {proj.projectLink && (
+                  <>
+                    <span style={{ color: "#94a3b8", margin: "0 8px", fontSize: "13px" }}>|</span>
+                    <a
+                      href={proj.projectLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        fontSize: "13px",
+                        color: "#64748b", //
+                        textDecoration: "none",
+                        borderBottom: "1px dashed #cbd5e1"
+                      }}
+                    >
+                      {proj.projectLink}
+                    </a>
+                  </>
+                )}
+              </div>
+
               {dateDisplay && <div style={{ fontSize: "12px", color: "#475569", fontWeight: "500" }}>{dateDisplay}</div>}
             </div>
             {proj.summary && <p className="resume-text" style={{ marginTop: "2px" }}>{proj.summary}</p>}

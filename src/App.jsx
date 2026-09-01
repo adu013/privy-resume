@@ -23,7 +23,7 @@ export default function App() {
       { certName: "", certInstitute: "", certDate: "" }
     ],
     projects: [
-      { name: "", projStart: "", projEnd: "", summary: "", highlights: [""] }
+      { name: "", projectLink: "", projStart: "", projEnd: "", summary: "", highlights: [""] }
     ],
     skillsList: [
       { name: "", highlights: [""] }

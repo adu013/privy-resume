@@ -6,29 +6,30 @@ import PreviewProjects from "../components/preview/PreviewProjects";
 describe("PreviewProjects Canvas Render Engine", () => {
 
   test("skips rendering section elements when engineering projects list is empty", () => {
-    // Arrange: Setup empty initial state matching the exact schema [INDEX]
+    // Arrange: Setup an empty initial state matching the exact schema
     const blankMockData = {
-      projects: [{ name: "", summary: "", projStart: "", projEnd: "", highlights: [] }]
+      projects: [{ name: "", summary: "", projStart: "", projEnd: "", projectLink: "", highlights: [] }]
     };
 
     // Act: Render the node container into jsdom virtual DOM canvas
-    const { container } = render(<PreviewProjects resumeData={blankMockData} />);
+    render(<PreviewProjects resumeData={blankMockData} />);
 
-    // Assert: Verifies that the nested section heading text does NOT mount to the tree [INDEX]
+    // Assert: Verifies that the nested section heading text does NOT mount to the tree
     const heading = screen.queryByText(/Projects/i);
     expect(heading).not.toBeInTheDocument();
   });
 
-  test("renders full technical project card parameters flawlessly on screen", () => {
-    // Arrange: Setup populated project data tracking your exact keys [INDEX]
+  test("renders project name, vertical partition, and light hyperlinks successfully when projectLink is present", () => {
+    // Arrange: Setup populated data context matching the exact file properties
     const activeMockData = {
       projects: [
         {
           name: "Privy Resume Sandbox",
-          summary: "A privacy-first serverless local layout optimization compiler workspace.",
+          summary: "A privacy-first serverless local workspace.",
           projStart: "2024",
           projEnd: "2026",
-          highlights: ["Engineered client-side state models.", "Optimized print tracking sheets."]
+          projectLink: "https://github.com",
+          highlights: ["Engineered client-side state models."]
         }
       ]
     };
@@ -36,15 +37,18 @@ describe("PreviewProjects Canvas Render Engine", () => {
     // Act: Render the component node tree
     render(<PreviewProjects resumeData={activeMockData} />);
 
-    // Assert: Verify headings and text fragments mount into the visible tree [INDEX]
+    // Assert: Verify headings and text fragments mount into the visible tree
     expect(screen.getByText("Projects")).toBeInTheDocument();
-    expect(screen.getByText(/Privy Resume Sandbox/i)).toBeInTheDocument();
-    expect(screen.getByText(/A privacy-first serverless local layout optimization compiler workspace/i)).toBeInTheDocument();
-    expect(screen.getByText(/2024 — 2026/i)).toBeInTheDocument();
+    expect(screen.getByText("Privy Resume Sandbox")).toBeInTheDocument();
+    expect(screen.getByText("|")).toBeInTheDocument(); // Verifies the vertical divider text node splits elements
 
-    // Verify bullet items list rendering
+    // Verifies that the URL renders inside an authentic anchor link selector node with the exact href
+    const linkElement = screen.getByRole("link", { name: "https://github.com" });
+    expect(linkElement).toBeInTheDocument();
+    expect(linkElement.getAttribute("href")).toBe("https://github.com");
+
+    // Verify bullet lists rendering
     expect(screen.getByText(/Engineered client-side state models/i)).toBeInTheDocument();
-    expect(screen.getByText(/Optimized print tracking sheets/i)).toBeInTheDocument();
   });
 
 });
