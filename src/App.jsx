@@ -83,7 +83,11 @@ export default function App() {
 
   // Inject the Profile Management Engine Hook (from hooks/useProfile)
   const {
-    resumeData, profiles, activeProfileName,
+    resumeData,
+    profiles,
+    activeProfileName,
+    isSharedView,
+    setIsSharedView,
     handleInputChange, addArrayItem, removeArrayItem,
     addJobHighlight, removeJobHighlight,
     addProjectHighlight, removeProjectHighlight,
@@ -118,6 +122,10 @@ export default function App() {
             onSwitchProfile={handleSwitchProfile}
             onCreateProfile={handleCreateProfile}
             onDeleteProfile={handleDeleteProfile}
+
+            // Shared View
+            isSharedView={isSharedView}
+            onExitPreview={() => setIsSharedView(false)}
 
             style={{ flex: "1 1 auto", width: "100%", maxWidth: "100%" }}
           />

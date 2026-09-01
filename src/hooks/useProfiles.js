@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { compressData, decompressData } from "../utils/urlCOmpactor";
 
 export function useProfiles(blankBlueprint, triggerToast) {
+
   // Initialise Active Profile Name Tracking
   const [activeProfileName, setActiveProfileName] = useState(() => {
     return localStorage.getItem("privy_active_profile_name") || "Default Profile";
@@ -22,6 +23,9 @@ export function useProfiles(blankBlueprint, triggerToast) {
     return { "Default Profile": baselineData };
   });
 
+   // STRICT VISIBILITY ENGINE: Initialized to false so root direct hits default to form fields!
+  const [isSharedView, setIsSharedView] = useState(false);
+
   // Derived Active Workspace Profile Data Selection
   const resumeData = profiles[activeProfileName] || blankBlueprint;
 
@@ -29,7 +33,7 @@ export function useProfiles(blankBlueprint, triggerToast) {
   useEffect(() => {
     const handleInboundHash = async () => {
       const hash = window.location.hash;
-      if (hash.startsWith("#share=")) {
+      if (hash && hash.startsWith("#share=")) {
         const token = hash.replace("#share=", "");
         if (!token) return;
 
@@ -42,6 +46,9 @@ export function useProfiles(blankBlueprint, triggerToast) {
             [sharedName]: parsedData
           }));
           setActiveProfileName(sharedName);
+
+          // TRIGGER READ-ONLY PUBLIC PREVIEW MODE ACTIVE
+          setIsSharedView(true);
 
           // Strip hash parameters out cleanly from the browser address bar bar for clean hygiene
           window.history.replaceState(null, "", window.location.pathname);
@@ -223,7 +230,11 @@ export function useProfiles(blankBlueprint, triggerToast) {
   };
 
   return {
-    resumeData, profiles, activeProfileName,
+    resumeData,
+    profiles,
+    activeProfileName,
+    isSharedView,
+    setIsSharedView,
     handleInputChange, addArrayItem, removeArrayItem,
     addJobHighlight: (idx) => addHighlightHelper("jobs", idx),
     removeJobHighlight: (jIdx, hIdx) => removeHighlightHelper("jobs", jIdx, hIdx),
