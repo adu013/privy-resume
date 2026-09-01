@@ -17,12 +17,34 @@ export default function PreviewExperience({ resumeData }) {
                   {job.company}{job.country && `, ${job.country}`}
                 </div>
               </div>
+
+              {/** Display Job Start & End */}
               {(job.jobStart || job.jobEnd) && (
                 <div style={{ fontSize: "12px", color: "#475569", fontWeight: "500" }}>
                   {job.jobStart} — {job.jobEnd || "Present"}
                 </div>
               )}
             </div>
+
+            {/** Display Company Link */}
+            {job.companyLink && (
+                <div style={{ marginTop: "2px" }}>
+                  <a
+                    href={job.companyLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: "12px",
+                      color: "#64748b",
+                      textDecoration: "none",
+                      borderBottom: "1px dashed #cbd5e1"
+                    }}
+                  >
+                    ({job.companyLink})
+                  </a>
+                </div>
+              )}
+
             {job.highlights && job.highlights.length > 0 && (
               <ul style={{ margin: "4px 0 0 0", paddingLeft: "18px", listStyleType: "disc" }}>
                 {job.highlights.map((bullet, bIdx) => bullet && <li key={bIdx} className="resume-text" style={{ fontSize: "12.5px" }}>{bullet}</li>)}

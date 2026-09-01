@@ -15,7 +15,7 @@ export default function App() {
     summary: "",
     competencies: [{ name: "" }],
     jobs: [
-      { company: "", country: "", jobTitle: "", jobStart: "", jobEnd: "", highlights: [""] }
+      { company: "", country: "", companyLink: "", jobTitle: "", jobStart: "", jobEnd: "", highlights: [""] }
     ],
     degrees: [
       { collegeName: "", degree: "", specialization: "", eduStart: "", eduEnd: "" }

@@ -51,6 +51,17 @@ export default function ExperienceForm({
               />
             </div>
             <div className="input-group" style={{ gridColumn: "1 / -1", marginTop: "10px" }}>
+              <label className="input-label">Company Website URL</label>
+              <input
+                type="url"
+                name="companyLink"
+                value={job.companyLink || ""}
+                onChange={(e) => onInputChange(e, jobIdx, "jobs")}
+                placeholder="https://company.com"
+                className="form-input"
+              />
+            </div>
+            <div className="input-group" style={{ gridColumn: "1 / -1", marginTop: "10px" }}>
               <label className="input-label">Job Title</label>
               <input
                 type="text" name="jobTitle" value={job.jobTitle || ""}
