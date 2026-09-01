@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LandingPage from "./components/LandingPage";
+import ToastNotification from "./components/TostNotification";
 import Workspace from "./components/Workspace";
 
 export default function App() {
@@ -73,13 +74,27 @@ export default function App() {
     showBranding: true
   };
 
-  // 2. Load cached records directly from browser local storage
+  // Load cached records directly from browser local storage
   const [resumeData, setResumeData] = useState(() => {
     const localSaved = localStorage.getItem("privy_resume_cache");
     return localSaved ? JSON.parse(localSaved) : blankResumeBlueprint;
   });
 
-  // 3. Save updates instantly into your offline storage folder
+// State declaration:
+const [toast, setToast] = useState({ show: false, message: "", type: "success" });
+
+// Reusable launcher function:
+const triggerToast = (message, type = "success") => {
+  setToast({ show: true, message, type });
+
+  // Auto-hide the banner smoothly after 3000ms
+  setTimeout(() => {
+    setToast(prev => ({ ...prev, show: false }));
+  }, 3000);
+};
+
+
+  // Save updates instantly into your offline storage folder
   useEffect(() => {
     localStorage.setItem("privy_resume_cache", JSON.stringify(resumeData));
   }, [resumeData]);
@@ -212,6 +227,9 @@ export default function App() {
 
     document.body.removeChild(tempLink);
     URL.revokeObjectURL(url);
+
+    // Toast trigerred here:
+    triggerToast("📥 Data profile exported! JSON backup file downloaded successfully.");
   };
 
   // 8. IMPORT BACKUP LOGIC (Safely contained inside App component)
@@ -225,7 +243,10 @@ export default function App() {
         const parsedData = JSON.parse(event.target.result);
         if (parsedData && typeof parsedData === "object") {
           setResumeData(parsedData);
-          alert("✓ Backup configuration loaded successfully!");
+          // alert("✓ Backup configuration loaded successfully!");
+
+          // Toast triggered here
+          triggerToast("✓ Backup profile loaded successfully! All sections synced offline.");
         } else {
           alert("✕ Invalid file configuration format.");
         }
@@ -244,22 +265,25 @@ export default function App() {
   };
 
   return isStarted ? (
-    <Workspace
-      resumeData={resumeData}
-      onInputChange={handleInputChange}
-      onClearForm={handleClearForm}
-      onBack={() => setIsStarted(false)}
-      onAddItem={addArrayItem}
-      onRemoveItem={removeArrayItem}
-      onAddHighlight={addJobHighlight}
-      onRemoveHighlight={removeJobHighlight}
-      onAddProjHighlight={addProjectHighlight}
-      onRemoveProjHighlight={removeProjectHighlight}
-      onAddSkillHighlight={addSkillHighlight}
-      onRemoveSkillHighlight={removeSkillHighlight}
-      onExportJSON={handleExportJSON}
-      onImportJSON={handleImportJSON}
-    />
+    <>
+      <Workspace
+        resumeData={resumeData}
+        onInputChange={handleInputChange}
+        onClearForm={handleClearForm}
+        onBack={() => setIsStarted(false)}
+        onAddItem={addArrayItem}
+        onRemoveItem={removeArrayItem}
+        onAddHighlight={addJobHighlight}
+        onRemoveHighlight={removeJobHighlight}
+        onAddProjHighlight={addProjectHighlight}
+        onRemoveProjHighlight={removeProjectHighlight}
+        onAddSkillHighlight={addSkillHighlight}
+        onRemoveSkillHighlight={removeSkillHighlight}
+        onExportJSON={handleExportJSON}
+        onImportJSON={handleImportJSON}
+      />
+      <ToastNotification toast={toast} />
+    </>
   ) : (
     <LandingPage onStart={() => setIsStarted(true)} />
   );
