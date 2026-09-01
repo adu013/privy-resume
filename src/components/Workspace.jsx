@@ -15,7 +15,7 @@ import ResumePreview from "./ResumePreview";
 export default function Workspace({
   resumeData, onInputChange, onClearForm, onBack, onAddItem, onRemoveItem,
   onAddHighlight, onRemoveHighlight, onAddProjHighlight, onRemoveProjHighlight,
-  onAddSkillHighlight, onRemoveSkillHighlight, // 👈 FIXED: Added missing props here
+  onAddSkillHighlight, onRemoveSkillHighlight,
   onExportJSON, onImportJSON
 }) {
   const [currentStep, setCurrentStep] = useState(1);

@@ -6,7 +6,7 @@ export default function PreviewExperience({ resumeData }) {
 
   return (
     <div>
-      <h4 className="resume-section-title">Experiences</h4>
+      <h4 className="resume-section-title">Work Experiences</h4>
       {jobsList.map((job, idx) => (
         (job.company || job.jobTitle) && (
           <div key={idx} style={{ marginBottom: "14px" }}>

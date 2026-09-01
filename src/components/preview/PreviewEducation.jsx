@@ -28,24 +28,6 @@ export default function PreviewEducation({ resumeData }) {
           ))}
         </div>
       )}
-
-      {/* Certifications block */}
-      {hasCerts && (
-        <div>
-          <h4 className="resume-section-title">Certifications</h4>
-          {certsList.map((cert, idx) => (
-            (cert.certName || cert.certInstitute) && (
-              <div key={idx} style={{ display: "flex", justifyContent: "space-between", alignItems: "start", marginBottom: "6px" }}>
-                <div>
-                  <strong style={{ fontSize: "14px", color: "#0f172a" }}>{cert.certName}</strong>
-                  <div className="resume-text">{cert.certInstitute}</div>
-                </div>
-                {cert.certDate && <div style={{ fontSize: "12px", color: "#475569", fontWeight: "500" }}>{cert.certDate}</div>}
-              </div>
-            )
-          ))}
-        </div>
-      )}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import ColorPicker from "./ColorPicker";
 import DensitySliders from "./DensitySlider";
 import FontSwitcher from "./FontSwitcher";
 import LayoutSwitcher from "./LayoutSwitcher";
+import SectionShuffler from "./SectionShuffler";
 
 export default function ContactForm({ resumeData, onInputChange }) {
   return (
@@ -50,6 +51,9 @@ export default function ContactForm({ resumeData, onInputChange }) {
 
       {/* Density Slider */}
       <DensitySliders resumeData={resumeData} onInputChange={onInputChange} />
+
+      {/** Section Shuffler */}
+      <SectionShuffler resumeData={resumeData} onInputChange={onInputChange} />
 
       {/* PrivyResume branding toggle box */}
       <div style={{

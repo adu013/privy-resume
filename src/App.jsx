@@ -36,6 +36,19 @@ export default function App() {
       { label: "", url: "" }
     ],
 
+    // Section Dynamic Ordering
+    sectionOrder: [
+      "summary",
+      "competencies",
+      "experience",
+      "projects",
+      "education",
+      "skills",
+      "certifications",
+      "awards",
+      "references"
+    ],
+
     // References
     references: [{ name: "", title: "", company: "", contact: "" }],
 
