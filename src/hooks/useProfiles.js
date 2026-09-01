@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { compressData, decompressData } from "../utils/urlCOmpactor";
+import { compressData, decompressData } from "../utils/urlCompactor";
 
 export function useProfiles(blankBlueprint, triggerToast) {
 
@@ -72,6 +72,14 @@ export function useProfiles(blankBlueprint, triggerToast) {
       setActiveProfileName(name);
       triggerToast(`✓ Switched to profile: "${name}"`);
     }
+  };
+
+  const handleClearActiveProfile = () => {
+    setProfiles((prev) => ({
+      ...prev,
+      [activeProfileName]: JSON.parse(JSON.stringify(blankBlueprint)) // Clones a fresh blank template slate
+    }));
+    triggerToast(`↺ Profile "${activeProfileName}" reset back to empty template baseline.`);
   };
 
   const handleCreateProfile = (name) => {
@@ -176,38 +184,89 @@ export function useProfiles(blankBlueprint, triggerToast) {
 
   // Offline JSON File Export Backup Streams
   const handleExportJSON = () => {
-    const dataStr = JSON.stringify(resumeData, null, 2);
+    // 🌍 Package everything: the complete multi-profile registry and the currently selected account name tracker key
+    const fullBackupPayload = {
+      isMasterBackup: true, // Internal schema identifier token
+      activeProfileName: activeProfileName,
+      profiles: profiles
+    };
+
+    const dataStr = JSON.stringify(fullBackupPayload, null, 2);
     const blob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const tempLink = document.createElement("a");
     tempLink.href = url;
-    tempLink.download = resumeData.fullName ? `${resumeData.fullName.replace(/\s+/g, "_")}_resume_backup.json` : "privy_resume_backup.json";
+
+    // Smart file naming logic matching your active account workspace parameters
+    const safeProfileName = activeProfileName.replace(/\s+/g, "_");
+    const fileName = resumeData.fullName
+      ? `${resumeData.fullName.replace(/\s+/g, "_")}_(${safeProfileName})_master_backup.json`
+      : `privy_workspace_(${safeProfileName})_master_backup.json`;
+
+    tempLink.download = fileName;
     document.body.appendChild(tempLink);
     tempLink.click();
     document.body.removeChild(tempLink);
     URL.revokeObjectURL(url);
-    triggerToast("📥 Data profile exported! JSON backup file downloaded successfully.");
+
+    triggerToast("📥 Complete dashboard database exported! All profiles backed up successfully.");
   };
 
+
   // Offline JSON File Export Backup Streams
+  // 🔒 UPGRADED MULTI-PROFILE INTELLIGENT PARSER RESTORER
   const handleImportJSON = (e) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
+    const targetInputFiles = e?.target?.files || e?.files || e;
+    const selectedFile = targetInputFiles && targetInputFiles.length > 0 ? targetInputFiles[0] : null;
+
+    if (!selectedFile) {
+      triggerToast("❌ No valid backup file selected.", "error");
+      return;
+    }
+
     const fileReader = new FileReader();
     fileReader.onload = (event) => {
       try {
         const parsedData = JSON.parse(event.target.result);
         if (parsedData && typeof parsedData === "object") {
-          setProfiles((prev) => ({ ...prev, [activeProfileName]: parsedData }));
-          triggerToast("✓ Backup profile loaded successfully! Active profile data updated.");
+
+          // 📁 PATH A: Handles your new Full Master Multi-Profile system backups seamlessly
+          if (parsedData.isMasterBackup && parsedData.profiles) {
+            setProfiles(parsedData.profiles);
+            if (parsedData.activeProfileName && parsedData.profiles[parsedData.activeProfileName]) {
+              setActiveProfileName(parsedData.activeProfileName);
+            } else {
+              setActiveProfileName(Object.keys(parsedData.profiles)[0]);
+            }
+            triggerToast("✓ Master multi-profile ecosystem restored successfully!");
+          }
+          // 📄 PATH B: Fallback backward-compatibility support for single flat resume backup models
+          else if (parsedData.hasOwnProperty("Default Profile") || Object.keys(parsedData).some(k => parsedData[k]?.sectionOrder)) {
+            setProfiles(parsedData);
+            setActiveProfileName(Object.keys(parsedData)[0]);
+            triggerToast("✓ Multi-profile dictionary parsed successfully!");
+          } else {
+            // Overwrites just the active layout lane card slot with their single resume data
+            setProfiles((prev) => ({
+              ...prev,
+              [activeProfileName]: parsedData
+            }));
+            triggerToast(`✓ Backup profile data loaded cleanly into "${activeProfileName}"!`);
+          }
         }
       } catch (err) {
+        console.error("Malformed backup processing failure:", err);
         triggerToast("❌ Failed to parse data. Ensure file is a valid JSON backup.", "error");
       }
     };
-    fileReader.readAsText(files);
-    e.target.value = "";
+
+    fileReader.readAsText(selectedFile);
+    if (e?.target) {
+      e.target.value = "";
+    }
   };
+
+
 
   // Expose sharing utility:
   const handleShareDeepLink = async () => {
@@ -244,6 +303,10 @@ export function useProfiles(blankBlueprint, triggerToast) {
     removeSkillHighlight: (sIdx, hIdx) => removeHighlightHelper("skillsList", sIdx, hIdx),
     handleShareDeepLink,
     handleExportJSON, handleImportJSON,
-    handleSwitchProfile, handleCreateProfile, handleDeleteProfile
+    // Profile handlers
+    handleClearActiveProfile,
+    handleSwitchProfile,
+    handleCreateProfile,
+    handleDeleteProfile
   };
 }

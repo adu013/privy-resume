@@ -92,8 +92,8 @@ export default function App() {
     addJobHighlight, removeJobHighlight,
     addProjectHighlight, removeProjectHighlight,
     addSkillHighlight, removeSkillHighlight,
-    handleExportJSON, handleImportJSON,
-    handleSwitchProfile, handleCreateProfile, handleDeleteProfile,
+    handleExportJSON, handleImportJSON, // JSON Import / Export
+    handleClearActiveProfile, handleSwitchProfile, handleCreateProfile, handleDeleteProfile, // Profile handlers
     handleShareDeepLink
   } = useProfiles(blankResumeBlueprint, triggerToast);
 
@@ -117,6 +117,8 @@ export default function App() {
             onImportBackup={handleImportJSON}
             onShareDeepLink={handleShareDeepLink}
 
+            onClearForm={handleClearActiveProfile}
+
             profiles={profiles}
             activeProfileName={activeProfileName}
             onSwitchProfile={handleSwitchProfile}
@@ -126,6 +128,10 @@ export default function App() {
             // Shared View
             isSharedView={isSharedView}
             onExitPreview={() => setIsSharedView(false)}
+
+            // EXPORT / IMPORT JSON
+            onExportJSON={handleExportJSON}
+            onImportJSON={handleImportJSON}
 
             style={{ flex: "1 1 auto", width: "100%", maxWidth: "100%" }}
           />
