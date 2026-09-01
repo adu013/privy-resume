@@ -11,8 +11,10 @@ import SkillsForm from "./SkillsForm";
 import LinksForm from "./LinksForm";
 import ReferencesForm from "./ReferencesForm";
 import ResumePreview from "./ResumePreview";
+import ProfileSwitcher from "./ProfileSwitcher";
 
 export default function Workspace({
+  profiles, activeProfileName, onSwitchProfile, onCreateProfile, onDeleteProfile,
   resumeData, onInputChange, onClearForm, onBack, onAddItem, onRemoveItem,
   onAddHighlight, onRemoveHighlight, onAddProjHighlight, onRemoveProjHighlight,
   onAddSkillHighlight, onRemoveSkillHighlight,
@@ -36,6 +38,15 @@ export default function Workspace({
 
   return (
     <div className="workspace-container">
+
+      {/* 🌟 GLOBAL PROFILE SWITCHER INTERFACE INJECTED AT THE TOP */}
+      <ProfileSwitcher
+        profiles={profiles}
+        activeProfileName={activeProfileName}
+        onSwitch={onSwitchProfile}
+        onCreate={onCreateProfile}
+        onDelete={onDeleteProfile}
+      />
 
       {/* CLICKABLE WORKSPACE NAVIGATION BAR */}
       <header className="workspace-header" style={{ flexDirection: "column", gap: "12px", padding: "12px 24px" }}>
