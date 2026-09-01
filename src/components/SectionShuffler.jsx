@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function SectionShuffler({ resumeData, onInputChange }) {
+  // Recruiter-Approved Consensus Default Order Blueprint
   const defaultOrder = [
     "summary",
     "competencies",
@@ -27,18 +28,24 @@ export default function SectionShuffler({ resumeData, onInputChange }) {
     awards: "Awards & Achievements"
   };
 
+  // Helper check to see if the user has changed the order from the default sequence
+  const isOrderModified = JSON.stringify(currentOrder) !== JSON.stringify(defaultOrder);
+
   const moveSection = (index, direction) => {
     const newOrder = [...currentOrder];
     const targetIndex = index + direction;
 
     if (targetIndex < 0 || targetIndex >= newOrder.length) return;
 
-    // Swap position elements smoothly in the array track
     const temp = newOrder[index];
     newOrder[index] = newOrder[targetIndex];
     newOrder[targetIndex] = temp;
 
     onInputChange({ target: { name: "sectionOrder", value: newOrder } });
+  };
+
+  const resetToDefault = () => {
+    onInputChange({ target: { name: "sectionOrder", value: defaultOrder } });
   };
 
   return (
@@ -52,10 +59,36 @@ export default function SectionShuffler({ resumeData, onInputChange }) {
       flexDirection: "column",
       gap: "10px"
     }}>
-      <label style={{ fontSize: "11px", fontWeight: "700", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.5px" }}>
-        ↕️ Section Priority Shuffler
-      </label>
+      {/* Header Row with Title and Reset Button */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <label style={{ fontSize: "11px", fontWeight: "700", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+          ↕️ Section Priority Shuffler
+        </label>
 
+        {isOrderModified && (
+          <button
+            type="button"
+            onClick={resetToDefault}
+            style={{
+              padding: "4px 8px",
+              borderRadius: "4px",
+              backgroundColor: "rgba(147, 51, 234, 0.15)",
+              border: "1px solid #9333ea",
+              color: "#a855f7",
+              fontSize: "11px",
+              fontWeight: "600",
+              cursor: "pointer",
+              transition: "all 0.2s ease"
+            }}
+            onMouseEnter={(e) => e.target.style.backgroundColor = "rgba(147, 51, 234, 0.3)"}
+            onMouseLeave={(e) => e.target.style.backgroundColor = "rgba(147, 51, 234, 0.15)"}
+          >
+            ↺ Reset Layout
+          </button>
+        )}
+      </div>
+
+      {/* Shuffler List Items Stack */}
       <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
         {currentOrder.map((sectionId, index) => (
           <div
