@@ -68,8 +68,10 @@ export default function Workspace(props) {
           handlePrev={handlePrev} handleNext={handleNext}
 
           onAddCustomSection={props.onAddCustomSection}
+          onRemoveCustomSection={props.onRemoveCustomSection}
           onCustomSectionChange={props.onCustomSectionChange}
           onAddCustomItem={props.onAddCustomItem}
+          onRemoveCustomItem={props.onRemoveCustomItem}
           onAddCustomHighlight={props.onAddCustomHighlight}
           onRemoveCustomHighlight={props.onRemoveCustomHighlight}
         />

@@ -43,8 +43,10 @@ export default function App() {
 
     // CUSTOM SECTION
     handleAddCustomSection,
+    handleRemoveCustomSection,
     handleCustomSectionChange,
     handleAddCustomItem,
+    handleRemoveCustomItem,
     handleAddCustomHighlight,
     handleRemoveCustomHighlight,
 
@@ -93,8 +95,10 @@ export default function App() {
 
             // CUSTOM SECTION
             onAddCustomSection={handleAddCustomSection}
+            onRemoveCustomSection={handleRemoveCustomSection}
             onCustomSectionChange={handleCustomSectionChange}
             onAddCustomItem={handleAddCustomItem}
+            onRemoveCustomItem={handleRemoveCustomItem}
             onAddCustomHighlight={handleAddCustomHighlight}
             onRemoveCustomHighlight={handleRemoveCustomHighlight}
 

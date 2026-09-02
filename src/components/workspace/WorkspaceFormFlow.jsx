@@ -28,8 +28,10 @@ export default function WorkspaceFormFlow({
   handleNext,
 
   onAddCustomSection,
+  onRemoveCustomSection,
   onCustomSectionChange,
   onAddCustomItem,
+  onRemoveCustomItem,
   onAddCustomHighlight,
   onRemoveCustomHighlight,
 }) {
@@ -74,8 +76,10 @@ export default function WorkspaceFormFlow({
             <CustomSectionForm
                 customSections={resumeData.customSections || []}
                 onAddSection={onAddCustomSection}
+                onRemoveSection={onRemoveCustomSection}
                 onChange={onCustomSectionChange}
                 onAddItem={onAddCustomItem}
+                onRemoveItem={onRemoveCustomItem}
                 onAddHighlight={onAddCustomHighlight}
                 onRemoveHighlight={onRemoveCustomHighlight}
             />

@@ -95,6 +95,29 @@ const handleAddCustomSection = (headingText) => {
   triggerToast(`🌐 Custom section "${trimmed}" created! Check the form tabs.`);
 };
 
+// CUSTOM SECTION REMOVER HANDLE
+const handleRemoveCustomSection = (sectionIdx) => {
+  setProfiles(prev => {
+    const currentData = { ...prev[activeProfileName] };
+    const currentSections = [...(currentData.customSections || [])];
+
+    // Identify the explicit title heading before stripping it out
+    const targetHeading = currentSections[sectionIdx]?.heading;
+
+    // Remove the section container out of your data tracking stack
+    currentSections.splice(sectionIdx, 1);
+    currentData.customSections = currentSections;
+
+    // Remove the section signature key cleanly from your Section Shuffler deck array track
+    if (targetHeading && currentData.sectionOrder) {
+      currentData.sectionOrder = currentData.sectionOrder.filter(id => id !== targetHeading);
+    }
+
+    return { ...prev, [activeProfileName]: currentData };
+  });
+  triggerToast("✕ Custom section and all its contents deleted completely.");
+};
+
 const handleCustomSectionChange = (e, sectionIdx, itemIdx, fieldName, highlightIdx = null) => {
   const { value } = e.target || { value: e };
 
@@ -134,6 +157,34 @@ const handleAddCustomItem = (sectionIdx) => {
 
     return { ...prev, [activeProfileName]: currentData };
   });
+};
+
+// CUSTOM SECTION'S ITEM REMOVER HANDLE
+const handleRemoveCustomItem = (sectionIdx, itemIdx) => {
+  setProfiles(prev => {
+    const currentData = { ...prev[activeProfileName] };
+    const currentSections = [...(currentData.customSections || [])];
+
+    const targetSection = { ...currentSections[sectionIdx] };
+    const targetItems = [...targetSection.items];
+
+    // Guard checklist constraint: Ensure at least one entry card remains in the module loop
+    if (targetItems.length <= 1) {
+      triggerToast("⚠️ Custom sections must maintain at least 1 primary entry card block!", "error");
+      return prev;
+    }
+
+    // Remove exactly 1 targeted card index out of the nested array rows list
+    targetItems.splice(itemIdx, 1);
+
+    // Stitch states back into place
+    targetSection.items = targetItems;
+    currentSections[sectionIdx] = targetSection;
+    currentData.customSections = currentSections;
+
+    return { ...prev, [activeProfileName]: currentData };
+  });
+  triggerToast("✕ Entry card removed cleanly.");
 };
 
 const handleAddCustomHighlight = (sectionIdx, itemIdx) => {
@@ -533,8 +584,10 @@ const handleAddCustomHighlight = (sectionIdx, itemIdx) => {
     handleDeleteProfile,
     // Custom Section Handlers
     handleAddCustomSection,
+    handleRemoveCustomSection,
     handleCustomSectionChange,
     handleAddCustomItem,
+    handleRemoveCustomItem,
     handleAddCustomHighlight,
     handleRemoveCustomHighlight,
   };
