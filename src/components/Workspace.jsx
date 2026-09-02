@@ -191,7 +191,7 @@ export default function Workspace({
               🔗 Share Link
             </button>
 
-            <button className="btn-danger" onClick={onClearForm}>Reset Data</button>
+            <button className="btn-danger" onClick={onClearForm}>↺ Reset Data</button>
             <button className="btn-secondary" onClick={onBack}>← Exit</button>
           </div>
         </div>
