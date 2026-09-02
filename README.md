@@ -2,11 +2,12 @@
 
 PrivyResume is a production-ready, open-source, **100% serverless, client-side resume workbench engine**. Built explicitly for security-conscious software engineers, developers, and tech professionals, it compiles standard Markdown-ready background fields into beautiful, ATS-optimized, high-density resumes without exposing personal metadata to tracking databases.
 
-🚀 **Live Production Workspace:** [https://privy-resume.traxrep.com](https://://traxrep.com/)
+🚀 **Live Production Workspace:** [https://privy-resume.traxrep.com](https://privy-resume.traxrep.com)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org)
-![Node version](https://img.shields.io/badge/node.js-339933)
-![React Version](https://img.shields.io/badge/-ReactJs-61DAFB)
+![Node 26](https://img.shields.io/badge/Node-26-5FA04E)
+![Vite 8](https://img.shields.io/badge/vite-%3E%3D8.0-646CFF?)
+![React 19](https://img.shields.io/badge/React-19-38bdf8)
 [![Cloudflare Build Badge](https://cloudflare-build-badge.xeffen25.com/Xeffen25/cloudflare-build-badge/status.svg)](https://cloudflare-build-badge.xeffen25.com/Xeffen25/cloudflare-build-badge/status.svg)
 
 ---
@@ -108,7 +109,7 @@ Output build files compile safely straight inside the localized `/dist` folder.
 
 This project uses an automated CI/CD pipeline integrated directly with **Cloudflare Pages**:
 * Every code push or merge event targeting the `main` branch triggers an immediate cloud-side compilation.
-* Builds execute using the environment flag configuration **`NODE_VERSION: 20`** to support Vite's asset packing pipeline requirements.
+* Builds execute using the environment flag configuration **`NODE_VERSION: 26`** to support Vite's asset packing pipeline requirements.
 * Built production directories deploy instantly onto a secure, edge-network production domain environment within seconds.
 
 ---
