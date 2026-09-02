@@ -101,6 +101,7 @@ export default function App() {
     handleSwitchProfile,
     handleCreateProfile,
     handleCloneProfile,
+    handleRenameProfile,
     handleDeleteProfile,
 
     // DEEPLINK HANDLER
@@ -134,6 +135,7 @@ export default function App() {
             activeProfileName={activeProfileName}
             onSwitchProfile={handleSwitchProfile}
             onCreateProfile={handleCreateProfile}
+            onRenameProfile={handleRenameProfile}
             onDeleteProfile={handleDeleteProfile}
 
             // CLONE PROFILE

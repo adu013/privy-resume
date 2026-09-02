@@ -120,6 +120,45 @@ export function useProfiles(blankBlueprint, triggerToast) {
     triggerToast(`✓ Profile "${trimmed}" created successfully!`);
   };
 
+  // Action closure for renaming User Profile:
+  const handleRenameProfile = (newName) => {
+    const trimmed = newName?.trim();
+
+    // Guard 1: Prevent empty strings
+    if (!trimmed) {
+      triggerToast("❌ Profile name cannot be empty!", "error");
+      return;
+    }
+
+    // Guard 2: Skip operation if the name is identical to its current name
+    if (trimmed === activeProfileName) {
+      return;
+    }
+
+    // Guard 3: Block execution if another profile already owns this name signature
+    if (profiles[trimmed]) {
+      triggerToast(`❌ A profile named "${trimmed}" already exists!`, "error");
+      return;
+    }
+
+    setProfiles(prev => {
+      const updatedProfiles = { ...prev };
+      // Fetch and preserve the active profile's data slice character-for-character
+      const activeDataSnapshot = updatedProfiles[activeProfileName];
+
+      // Inject the data into the new key slot and delete the obsolete key entry safely
+      updatedProfiles[trimmed] = activeDataSnapshot;
+      delete updatedProfiles[activeProfileName];
+
+      // Instantly flip the user workspace focus directly onto their renamed account track
+      setActiveProfileName(trimmed);
+      return updatedProfiles;
+    });
+
+    triggerToast(`✏️ Profile renamed successfully to "${trimmed}"!`);
+  };
+
+  // Action closure for deleting User Profile
   const handleDeleteProfile = (name) => {
     const profileKeys = Object.keys(profiles);
     if (profileKeys.length <= 1) {
@@ -331,6 +370,7 @@ export function useProfiles(blankBlueprint, triggerToast) {
     handleSwitchProfile,
     handleCreateProfile,
     handleCloneProfile,
+    handleRenameProfile,
     handleDeleteProfile
   };
 }
