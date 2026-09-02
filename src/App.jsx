@@ -39,7 +39,14 @@ export default function App() {
     handleDeleteProfile,
 
     // DEEPLINK HANDLER
-    handleShareDeepLink
+    handleShareDeepLink,
+
+    // CUSTOM SECTION
+    handleAddCustomSection,
+    handleCustomSectionChange,
+    handleAddCustomItem,
+    handleAddCustomHighlight,
+
   } = useProfiles(blankResumeBlueprint, triggerToast);
 
   // GUARD:
@@ -82,6 +89,12 @@ export default function App() {
 
             // ON LOAD DEMO PROFILE
             onLoadDemoProfile={handleLoadDemoProfile}
+
+            // CUSTOM SECTION
+            onAddCustomSection={handleAddCustomSection}
+            onCustomSectionChange={handleCustomSectionChange}
+            onAddCustomItem={handleAddCustomItem}
+            onAddCustomHighlight={handleAddCustomHighlight}
 
             // ACTIVATE SHARED VIEW WHEN USER HITS THE DEEP LINK
             isSharedView={isSharedView}

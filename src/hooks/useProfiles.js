@@ -62,6 +62,97 @@ export function useProfiles(blankBlueprint, triggerToast) {
   };
   // END: LOAD DEMO PROFILE
 
+// four Custom section handler
+
+const handleAddCustomSection = (headingText) => {
+  const trimmed = headingText?.trim();
+  if (!trimmed) return;
+
+  // Guard against duplicate header keys to prevent layout collisions
+  if (resumeData.customSections?.some(s => s.heading.toLowerCase() === trimmed.toLowerCase())) {
+    triggerToast("❌ A section with this heading already exists!", "error");
+    return;
+  }
+
+  setProfiles(prev => {
+    const currentData = { ...prev[activeProfileName] };
+    const currentSections = [...(currentData.customSections || [])];
+
+    currentSections.push({
+      heading: trimmed,
+      items: [{ title: "", subtitle: "", highlights: [""] }]
+    });
+
+    currentData.customSections = currentSections;
+
+    // Auto-append the section to your shuffler sequence array order list if present
+    if (currentData.sectionOrder && !currentData.sectionOrder.includes(trimmed)) {
+      currentData.sectionOrder = [...currentData.sectionOrder, trimmed];
+    }
+
+    return { ...prev, [activeProfileName]: currentData };
+  });
+  triggerToast(`🌐 Custom section "${trimmed}" created! Check the form tabs.`);
+};
+
+const handleCustomSectionChange = (e, sectionIdx, itemIdx, fieldName, highlightIdx = null) => {
+  const { value } = e.target || { value: e };
+
+  setProfiles(prev => {
+    const currentData = { ...prev[activeProfileName] };
+    const currentSections = [...(currentData.customSections || [])];
+    const targetSection = { ...currentSections[sectionIdx] };
+    const targetItems = [...targetSection.items];
+    const targetItem = { ...targetItems[itemIdx] };
+
+    if (highlightIdx !== null) {
+      const updatedHighlights = [...(targetItem.highlights || [""])];
+      updatedHighlights[highlightIdx] = value;
+      targetItem.highlights = updatedHighlights;
+    } else {
+      targetItem[fieldName] = value;
+    }
+
+    targetItems[itemIdx] = targetItem;
+    targetSection.items = targetItems;
+    currentSections[sectionIdx] = targetSection;
+    currentData.customSections = currentSections;
+
+    return { ...prev, [activeProfileName]: currentData };
+  });
+};
+
+const handleAddCustomItem = (sectionIdx) => {
+  setProfiles(prev => {
+    const currentData = { ...prev[activeProfileName] };
+    const currentSections = [...(currentData.customSections || [])];
+    const targetSection = { ...currentSections[sectionIdx] };
+
+    targetSection.items = [...targetSection.items, { title: "", subtitle: "", highlights: [""] }];
+    currentSections[sectionIdx] = targetSection;
+    currentData.customSections = currentSections;
+
+    return { ...prev, [activeProfileName]: currentData };
+  });
+};
+
+const handleAddCustomHighlight = (sectionIdx, itemIdx) => {
+  setProfiles(prev => {
+    const currentData = { ...prev[activeProfileName] };
+    const currentSections = [...(currentData.customSections || [])];
+    const targetSection = { ...currentSections[sectionIdx] };
+    const targetItems = [...targetSection.items];
+
+    targetItems[itemIdx].highlights = [...(targetItems[itemIdx].highlights || []), ""];
+    targetSection.items = targetItems;
+    currentSections[sectionIdx] = targetSection;
+    currentData.customSections = currentSections;
+
+    return { ...prev, [activeProfileName]: currentData };
+  });
+};
+
+
    // STRICT VISIBILITY ENGINE: Initialized to false so root direct hits default to form fields!
   const [isSharedView, setIsSharedView] = useState(false);
 
@@ -388,6 +479,11 @@ export function useProfiles(blankBlueprint, triggerToast) {
     handleCloneProfile,
     handleRenameProfile,
     handleLoadDemoProfile,
-    handleDeleteProfile
+    handleDeleteProfile,
+    // Custom Section Handlers
+    handleAddCustomSection,
+    handleCustomSectionChange,
+    handleAddCustomItem,
+    handleAddCustomHighlight,
   };
 }

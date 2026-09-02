@@ -86,14 +86,14 @@ export const demoProfilePayload = {
     { title: "Outstanding Technical Innovation Award", issuer: "Stark Tech Engineering Guild", date: "Dec-2024", summary: "Awarded for pioneering client-side edge streaming compression pipelines across core workspace nodes." }
   ],
 
-//   customSections: [
-//     {
-//       heading: "Speaking Engagements",
-//       items: [
-//         { title: "Keynote Technical Presenter", subtitle: "JS Conf Widescreen 2025", highlights: ["Delivered a masterclass on browser native client-side CompressionStream APIs to 500+ on-site senior tech leads."] }
-//       ]
-//     }
-//   ],
+  customSections: [
+    {
+      heading: "Speaking Engagements",
+      items: [
+        { title: "Keynote Technical Presenter", subtitle: "JS Conf Widescreen 2025", highlights: ["Delivered a masterclass on browser native client-side CompressionStream APIs to 500+ on-site senior tech leads."] }
+      ]
+    }
+  ],
 
   sectionOrder: ["summary", "competencies", "experience", "projects", "education", "skills", "certifications", "awards", "references", "Speaking Engagements"],
   selectedFontSize: 13,

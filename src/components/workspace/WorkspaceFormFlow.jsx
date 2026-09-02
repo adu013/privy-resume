@@ -10,6 +10,7 @@ import SkillsForm from "../SkillsForm";
 import LinksForm from "../LinksForm";
 import ReferencesForm from "../ReferencesForm";
 import AwardsForm from "../AwardsForm";
+import CustomSectionForm from "../forms/CustomSectionForm";
 
 export default function WorkspaceFormFlow({
   currentStep,
@@ -24,7 +25,12 @@ export default function WorkspaceFormFlow({
   onAddSkillHighlight,
   onRemoveSkillHighlight,
   handlePrev,
-  handleNext
+  handleNext,
+
+  onAddCustomSection,
+  onCustomSectionChange,
+  onAddCustomItem,
+  onAddCustomHighlight
 }) {
   return (
     <div className="form-panel" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
@@ -67,7 +73,7 @@ export default function WorkspaceFormFlow({
           ← Previous Section
         </button>
 
-        {currentStep < 11 ? (
+        {currentStep < 12 ? (
           <button
             className="btn-primary" onClick={handleNext}
             style={{ padding: "10px 20px", background: "linear-gradient(to right, #9333ea, #4f46e5)", color: "white", border: "none", borderRadius: "6px", fontWeight: "600", cursor: "pointer" }}
@@ -75,6 +81,17 @@ export default function WorkspaceFormFlow({
             Next Section →
           </button>
         ) : null}
+
+        {/* STEP 12: CUSTOM GENERIC SECTION BUILDER MOUNT VIEW */}
+        {currentStep === 12 && (
+            <CustomSectionForm
+                customSections={resumeData.customSections || []}
+                onAddSection={onAddCustomSection}
+                onChange={onCustomSectionChange}
+                onAddItem={onAddCustomItem}
+                onAddHighlight={onAddCustomHighlight}
+            />
+        )}
       </div>
     </div>
   );

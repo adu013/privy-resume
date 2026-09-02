@@ -12,11 +12,12 @@ export default function Workspace(props) {
 
   const stepTabs = [
     "Identity", "Profile", "Compentencies", "History", "Degrees",
-    "Certs", "Projects", "Skills", "Links", "References", "Awards"
+    "Certs", "Projects", "Skills", "Links", "References", "Awards",
+    "Custom Blocks"
   ];
 
   const handleNext = () => {
-    if (currentStep < 11) setCurrentStep(currentStep + 1);
+    if (currentStep < 12) setCurrentStep(currentStep + 1);
   };
 
   const handlePrev = () => {
@@ -65,6 +66,11 @@ export default function Workspace(props) {
           onAddProjHighlight={props.onAddProjHighlight} onRemoveProjHighlight={props.onRemoveProjHighlight}
           onAddSkillHighlight={props.onAddSkillHighlight} onRemoveSkillHighlight={props.onRemoveSkillHighlight}
           handlePrev={handlePrev} handleNext={handleNext}
+
+          onAddCustomSection={props.onAddCustomSection}
+          onCustomSectionChange={props.onCustomSectionChange}
+          onAddCustomItem={props.onAddCustomItem}
+          onAddCustomHighlight={props.onAddCustomHighlight}
         />
         <ResumePreview resumeData={props.resumeData} />
       </main>

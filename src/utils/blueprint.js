@@ -48,6 +48,9 @@
     // Awards
     awards: [{ title: "", issuer: "", date: "", summary: "" }],
 
+    // Custom Section
+    customSection: [],
+
     // Page-Density Slider Engine Properties (Default Mid-Points)
     selectedFontSize: 13,      /* Adjustable from 11px to 15px */
     selectedLineHeight: 1.5,   /* Adjustable from 1.2 to 1.8 */
