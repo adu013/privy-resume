@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { compressData, decompressData } from "../utils/urlCompactor";
+import { demoProfilePayload } from "../utils/demoProfileData";
 
 export function useProfiles(blankBlueprint, triggerToast) {
 
@@ -23,7 +24,7 @@ export function useProfiles(blankBlueprint, triggerToast) {
     return { "Default Profile": baselineData };
   });
 
-  // CLONE PROFILE
+  // START: CLONE PROFILE
   const handleCloneProfile = () => {
     const cloneName = `${activeProfileName} (Copy)`;
 
@@ -45,6 +46,21 @@ export function useProfiles(blankBlueprint, triggerToast) {
     setActiveProfileName(cloneName);
     triggerToast(`📄 Profile "${activeProfileName}" duplicated cleanly into "${cloneName}"!`);
   };
+  // END: CLONE PROFILE
+
+  // START: LOAD DEMO PROFILE
+  const handleLoadDemoProfile = () => {
+    // Take a clean, uncoupled deep-copy clone snapshot of the mockup data payload
+    const freshDemoSnapshot = JSON.parse(JSON.stringify(demoProfilePayload));
+
+    setProfiles(prev => ({
+      ...prev,
+      [activeProfileName]: freshDemoSnapshot
+    }));
+
+    triggerToast(`Realistic mockup profile loaded cleanly into "${activeProfileName}"!`);
+  };
+  // END: LOAD DEMO PROFILE
 
    // STRICT VISIBILITY ENGINE: Initialized to false so root direct hits default to form fields!
   const [isSharedView, setIsSharedView] = useState(false);
@@ -371,6 +387,7 @@ export function useProfiles(blankBlueprint, triggerToast) {
     handleCreateProfile,
     handleCloneProfile,
     handleRenameProfile,
+    handleLoadDemoProfile,
     handleDeleteProfile
   };
 }

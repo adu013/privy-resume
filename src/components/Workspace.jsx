@@ -15,7 +15,7 @@ import ProfileSwitcher from "./ProfileSwitcher";
 
 export default function Workspace({
   profiles, activeProfileName, onSwitchProfile, onCreateProfile, onDeleteProfile,
-  onRenameProfile, onCloneProfile,
+  onRenameProfile, onCloneProfile, onLoadDemoProfile,
   resumeData, onInputChange, onClearForm, onBack, onAddItem, onRemoveItem,
   onAddHighlight, onRemoveHighlight, onAddProjHighlight, onRemoveProjHighlight,
   onAddSkillHighlight, onRemoveSkillHighlight,
@@ -123,6 +123,28 @@ export default function Workspace({
           </div>
 
           <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+
+            {/* LOAD DEMO PROFILE ACTION ELEMENT */}
+            <button
+              onClick={onLoadDemoProfile}
+              style={{
+                padding: "6px 12px",
+                backgroundColor: "#1e1b4b", // Deep tech indigo velvet tint
+                color: "#a5b4fc",
+                border: "1px solid #4338ca",
+                borderRadius: "6px",
+                cursor: "pointer",
+                fontSize: "12px",
+                fontWeight: "700",
+                boxShadow: "0 0 10px rgba(99, 102, 241, 0.15)",
+                transition: "all 0.2s"
+              }}
+              onMouseEnter={(e) => { e.target.style.backgroundColor = "#312e81"; e.target.style.boxShadow = "0 0 14px rgba(99, 102, 241, 0.3)"; }}
+              onMouseLeave={(e) => { e.target.style.backgroundColor = "#1e1b4b"; e.target.style.boxShadow = "0 0 10px rgba(99, 102, 241, 0.15)"; }}
+            >
+              ✨ Load Demo Profile
+            </button>
+
             <button
               onClick={onExportJSON}
               style={{ padding: "6px 12px", backgroundColor: "#1e293b", color: "#cbd5e1", border: "1px solid #334155", borderRadius: "6px", cursor: "pointer", fontSize: "12px", fontWeight: "600" }}

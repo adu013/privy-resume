@@ -102,6 +102,7 @@ export default function App() {
     handleCreateProfile,
     handleCloneProfile,
     handleRenameProfile,
+    handleLoadDemoProfile,
     handleDeleteProfile,
 
     // DEEPLINK HANDLER
@@ -140,6 +141,9 @@ export default function App() {
 
             // CLONE PROFILE
             onCloneProfile={handleCloneProfile}
+
+            // ON LOAD DEMO PROFILE
+            onLoadDemoProfile={handleLoadDemoProfile}
 
             // ACTIVATE SHARED VIEW WHEN USER HITS THE DEEP LINK
             isSharedView={isSharedView}
