@@ -30,7 +30,8 @@ export default function WorkspaceFormFlow({
   onAddCustomSection,
   onCustomSectionChange,
   onAddCustomItem,
-  onAddCustomHighlight
+  onAddCustomHighlight,
+  onRemoveCustomHighlight,
 }) {
   return (
     <div className="form-panel" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
@@ -76,6 +77,7 @@ export default function WorkspaceFormFlow({
                 onChange={onCustomSectionChange}
                 onAddItem={onAddCustomItem}
                 onAddHighlight={onAddCustomHighlight}
+                onRemoveHighlight={onRemoveCustomHighlight}
             />
         )}
       </div>

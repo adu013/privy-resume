@@ -71,6 +71,7 @@ export default function Workspace(props) {
           onCustomSectionChange={props.onCustomSectionChange}
           onAddCustomItem={props.onAddCustomItem}
           onAddCustomHighlight={props.onAddCustomHighlight}
+          onRemoveCustomHighlight={props.onRemoveCustomHighlight}
         />
         <ResumePreview resumeData={props.resumeData} />
       </main>

@@ -46,6 +46,7 @@ export default function App() {
     handleCustomSectionChange,
     handleAddCustomItem,
     handleAddCustomHighlight,
+    handleRemoveCustomHighlight,
 
   } = useProfiles(blankResumeBlueprint, triggerToast);
 
@@ -95,6 +96,7 @@ export default function App() {
             onCustomSectionChange={handleCustomSectionChange}
             onAddCustomItem={handleAddCustomItem}
             onAddCustomHighlight={handleAddCustomHighlight}
+            onRemoveCustomHighlight={handleRemoveCustomHighlight}
 
             // ACTIVATE SHARED VIEW WHEN USER HITS THE DEEP LINK
             isSharedView={isSharedView}

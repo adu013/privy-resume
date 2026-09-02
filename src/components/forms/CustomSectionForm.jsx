@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function CustomSectionForm({
-  customSections, onAddSection, onChange, onAddItem, onAddHighlight
+  customSections, onAddSection, onChange, onAddItem, onAddHighlight, onRemoveHighlight
 }) {
   const [newHeading, setNewHeading] = useState("");
 
@@ -114,15 +114,43 @@ export default function CustomSectionForm({
               <div style={{ marginTop: "12px", display: "flex", flexDirection: "column", gap: "8px" }}>
                 <label className="input-label">Accomplishments & Bullet Descriptions</label>
                 {item.highlights?.map((bullet, bIdx) => (
-                  <input
-                    key={bIdx}
-                    type="text"
-                    value={bullet || ""}
-                    onChange={(e) => onChange(e, sIdx, iIdx, "highlights", bIdx)}
-                    placeholder="Describe specific technical contribution or milestone..."
-                    className="form-input"
-                    style={{ width: "96%", marginLeft: "auto" }}
-                  />
+                    /* FLEX PACKAGING CELL ROW: Placed input and delete cross button anchors side-by-side cleanly */
+                    <div key={bIdx} style={{ display: "flex", gap: "8px", alignItems: "center", width: "100%" }}>
+                      <input
+                        type="text"
+                        value={bullet || ""}
+                        onChange={(e) => onChange(e, sIdx, iIdx, "highlights", bIdx)}
+                        placeholder="Describe specific technical contribution or milestone..."
+                        className="form-input"
+                        style={{ flex: 1, marginBottom: 0 }}
+                      />
+
+                      {/* Compact clean deletion anchor tag revealed when more than one bullet line sits active */}
+                      {item.highlights.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            onRemoveHighlight(sIdx, iIdx, bIdx);
+                          }}
+                          className="btn-danger"
+                          style={{
+                            padding: "8px 12px",
+                            backgroundColor: "rgba(239, 68, 68, 0.1)",
+                            border: "1px solid #ef4444",
+                            color: "#f87171",
+                            borderRadius: "6px",
+                            cursor: "pointer",
+                            fontSize: "12px",
+                            fontWeight: "700"
+                          }}
+                          title="Delete this line element row"
+                        >
+                          ✕
+                        </button>
+                      )}
+                    </div>
                 ))}
 
                 <button

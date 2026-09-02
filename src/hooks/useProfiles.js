@@ -140,10 +140,19 @@ const handleAddCustomHighlight = (sectionIdx, itemIdx) => {
   setProfiles(prev => {
     const currentData = { ...prev[activeProfileName] };
     const currentSections = [...(currentData.customSections || [])];
+
+    // Deep copy the specific targeted custom section block container
     const targetSection = { ...currentSections[sectionIdx] };
     const targetItems = [...targetSection.items];
 
-    targetItems[itemIdx].highlights = [...(targetItems[itemIdx].highlights || []), ""];
+    // Deep copy the exact item entry card object block row
+    const targetItem = { ...targetItems[itemIdx] };
+
+    // Append exactly 1 clean empty text line parameters string token safely
+    targetItem.highlights = [...(targetItem.highlights || []), ""];
+
+    // Stitch copies seamlessly back into place
+    targetItems[itemIdx] = targetItem;
     targetSection.items = targetItems;
     currentSections[sectionIdx] = targetSection;
     currentData.customSections = currentSections;
@@ -152,6 +161,30 @@ const handleAddCustomHighlight = (sectionIdx, itemIdx) => {
   });
 };
 
+  // ACTION DELETION CLOSURE REDUCER
+  const handleRemoveCustomHighlight = (sectionIdx, itemIdx, highlightIdx) => {
+    setProfiles(prev => {
+      const currentData = { ...prev[activeProfileName] };
+      const currentSections = [...(currentData.customSections || [])];
+
+      const targetSection = { ...currentSections[sectionIdx] };
+      const targetItems = [...targetSection.items];
+      const targetItem = { ...targetItems[itemIdx] };
+
+      // Guard gate check parameter: verify there is more than 1 description row line remaining
+      if ((targetItem.highlights || []).length <= 1) return prev;
+
+      // Filter out exactly one single target item cell index cleanly [INDEX]
+      targetItem.highlights = targetItem.highlights.filter((_, i) => i !== highlightIdx);
+
+      targetItems[itemIdx] = targetItem;
+      targetSection.items = targetItems;
+      currentSections[sectionIdx] = targetSection;
+      currentData.customSections = currentSections;
+
+      return { ...prev, [activeProfileName]: currentData };
+    });
+  };
 
    // STRICT VISIBILITY ENGINE: Initialized to false so root direct hits default to form fields!
   const [isSharedView, setIsSharedView] = useState(false);
@@ -503,5 +536,6 @@ const handleAddCustomHighlight = (sectionIdx, itemIdx) => {
     handleCustomSectionChange,
     handleAddCustomItem,
     handleAddCustomHighlight,
+    handleRemoveCustomHighlight,
   };
 }
