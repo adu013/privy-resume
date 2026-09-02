@@ -390,3 +390,16 @@ body {
 }
 
 .btn-danger:hover { background-color: rgba(239, 68, 68, 0.2); }
+
+/* 📱 SMART VIEWPORT RESPONSIVE BUTTON RECONVERSIONS */
+@media (max-width: 820px) {
+  /* Hide the crowded flat horizontal horizontal row layout list */
+  .desktop-actions-row {
+    display: none !important;
+  }
+
+  /* Reveal the clean interactive context hamburger menu anchor */
+  .mobile-menu-hamburger-btn {
+    display: block !important;
+  }
+}
