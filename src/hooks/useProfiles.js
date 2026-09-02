@@ -23,6 +23,29 @@ export function useProfiles(blankBlueprint, triggerToast) {
     return { "Default Profile": baselineData };
   });
 
+  // CLONE PROFILE
+  const handleCloneProfile = () => {
+    const cloneName = `${activeProfileName} (Copy)`;
+
+    // Check if a clone with this exact text extension already exists to avoid collisions
+    if (profiles[cloneName]) {
+      triggerToast(`❌ A cloned profile named "${cloneName}" already exists!`, "error");
+      return;
+    }
+
+    // Create a deep structural clone copy of the active resume data slice
+    const duplicatedData = JSON.parse(JSON.stringify(resumeData));
+
+    setProfiles(prev => ({
+      ...prev,
+      [cloneName]: duplicatedData
+    }));
+
+    // Instantly flip the user workspace focus directly onto their fresh clone copy slot
+    setActiveProfileName(cloneName);
+    triggerToast(`📄 Profile "${activeProfileName}" duplicated cleanly into "${cloneName}"!`);
+  };
+
    // STRICT VISIBILITY ENGINE: Initialized to false so root direct hits default to form fields!
   const [isSharedView, setIsSharedView] = useState(false);
 
@@ -307,6 +330,7 @@ export function useProfiles(blankBlueprint, triggerToast) {
     handleClearActiveProfile,
     handleSwitchProfile,
     handleCreateProfile,
+    handleCloneProfile,
     handleDeleteProfile
   };
 }

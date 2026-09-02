@@ -92,8 +92,18 @@ export default function App() {
     addJobHighlight, removeJobHighlight,
     addProjectHighlight, removeProjectHighlight,
     addSkillHighlight, removeSkillHighlight,
-    handleExportJSON, handleImportJSON, // JSON Import / Export
-    handleClearActiveProfile, handleSwitchProfile, handleCreateProfile, handleDeleteProfile, // Profile handlers
+
+    // JSON EXPORT/IMPORT HANDLER
+    handleExportJSON, handleImportJSON,
+
+    // PROFILE HANDLER
+    handleClearActiveProfile,
+    handleSwitchProfile,
+    handleCreateProfile,
+    handleCloneProfile,
+    handleDeleteProfile,
+
+    // DEEPLINK HANDLER
     handleShareDeepLink
   } = useProfiles(blankResumeBlueprint, triggerToast);
 
@@ -119,13 +129,17 @@ export default function App() {
 
             onClearForm={handleClearActiveProfile}
 
+            // PROFILE SECTION
             profiles={profiles}
             activeProfileName={activeProfileName}
             onSwitchProfile={handleSwitchProfile}
             onCreateProfile={handleCreateProfile}
             onDeleteProfile={handleDeleteProfile}
 
-            // Shared View
+            // CLONE PROFILE
+            onCloneProfile={handleCloneProfile}
+
+            // ACTIVATE SHARED VIEW WHEN USER HITS THE DEEP LINK
             isSharedView={isSharedView}
             onExitPreview={() => setIsSharedView(false)}
 
@@ -133,6 +147,7 @@ export default function App() {
             onExportJSON={handleExportJSON}
             onImportJSON={handleImportJSON}
 
+            // GO BACK TO LANDING PAGE
             onBack={() => setIsStarted(false)}
 
             style={{ flex: "1 1 auto", width: "100%", maxWidth: "100%" }}

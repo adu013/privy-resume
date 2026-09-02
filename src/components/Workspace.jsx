@@ -15,6 +15,7 @@ import ProfileSwitcher from "./ProfileSwitcher";
 
 export default function Workspace({
   profiles, activeProfileName, onSwitchProfile, onCreateProfile, onDeleteProfile,
+  onCloneProfile,
   resumeData, onInputChange, onClearForm, onBack, onAddItem, onRemoveItem,
   onAddHighlight, onRemoveHighlight, onAddProjHighlight, onRemoveProjHighlight,
   onAddSkillHighlight, onRemoveSkillHighlight,
@@ -107,6 +108,7 @@ export default function Workspace({
         activeProfileName={activeProfileName}
         onSwitch={onSwitchProfile}
         onCreate={onCreateProfile}
+        onCloneProfile={onCloneProfile}
         onDelete={onDeleteProfile}
       />
 

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 export default function ProfileSwitcher({
-  profiles, activeProfileName, onSwitch, onCreate, onDelete
+  profiles, activeProfileName, onSwitch, onCreate, onDelete,
+  onCloneProfile
 }) {
   const [newProfileName, setNewProfileName] = useState("");
   const profileList = Object.keys(profiles);
@@ -49,6 +50,28 @@ export default function ProfileSwitcher({
             <option key={name} value={name}>{name}</option>
           ))}
         </select>
+
+        {/* PROFILE CLONE ICON BUTTON */}
+        <button
+          type="button"
+          onClick={onCloneProfile}
+          style={{
+            padding: "8px 12px",
+            borderRadius: "6px",
+            backgroundColor: "rgba(79, 70, 229, 0.15)", // Subtle indigo translucent shade
+            border: "1px solid #6366f1",
+            color: "#818cf8",
+            fontSize: "12px",
+            fontWeight: "700",
+            cursor: "pointer",
+            transition: "all 0.2s"
+          }}
+          title="Clone / Duplicate active profile dataset"
+          onMouseEnter={(e) => { e.target.style.backgroundColor = "rgba(79, 70, 229, 0.3)"; }}
+          onMouseLeave={(e) => { e.target.style.backgroundColor = "rgba(79, 70, 229, 0.15)"; }}
+        >
+          📝 Clone
+        </button>
 
         {profileList.length > 1 && (
           <button
