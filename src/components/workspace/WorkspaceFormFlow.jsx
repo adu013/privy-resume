@@ -34,6 +34,8 @@ export default function WorkspaceFormFlow({
 }) {
   return (
     <div className="form-panel" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+
+      {/* MAIN CONTENT HOOD: All forms (including step 12) mount here to stay scrollable and perfectly aligned */}
       <div style={{ flex: 1, overflowY: "auto", paddingBottom: "20px" }}>
         {currentStep === 1 && <ContactForm resumeData={resumeData} onInputChange={onInputChange} />}
         {currentStep === 2 && <SummaryForm resumeData={resumeData} onInputChange={onInputChange} />}
@@ -62,6 +64,17 @@ export default function WorkspaceFormFlow({
         {currentStep === 9 && <LinksForm resumeData={resumeData} onInputChange={onInputChange} onAddItem={onAddItem} onRemoveItem={onRemoveItem} />}
         {currentStep === 10 && <ReferencesForm resumeData={resumeData} onInputChange={onInputChange} onAddItem={onAddItem} onRemoveItem={onRemoveItem} />}
         {currentStep === 11 && <AwardsForm resumeData={resumeData} onInputChange={onInputChange} onAddItem={onAddItem} onRemoveItem={onRemoveItem} />}
+
+        {/* CUSTOM SECTION: Renders step 12 inside the wide viewport grid above the footer buttons */}
+        {currentStep === 12 && (
+            <CustomSectionForm
+                customSections={resumeData.customSections || []}
+                onAddSection={onAddCustomSection}
+                onChange={onCustomSectionChange}
+                onAddItem={onAddCustomItem}
+                onAddHighlight={onAddCustomHighlight}
+            />
+        )}
       </div>
 
       {/* LOWER NAVIGATION TIMELINE CONTROLLERS */}
@@ -73,6 +86,7 @@ export default function WorkspaceFormFlow({
           ← Previous Section
         </button>
 
+        {/* COUNTER LIMIT BOUNDS: Next button stays perfectly visible up until the absolute terminal step */}
         {currentStep < 12 ? (
           <button
             className="btn-primary" onClick={handleNext}
@@ -80,17 +94,9 @@ export default function WorkspaceFormFlow({
           >
             Next Section →
           </button>
-        ) : null}
-
-        {/* STEP 12: CUSTOM GENERIC SECTION BUILDER MOUNT VIEW */}
-        {currentStep === 12 && (
-            <CustomSectionForm
-                customSections={resumeData.customSections || []}
-                onAddSection={onAddCustomSection}
-                onChange={onCustomSectionChange}
-                onAddItem={onAddCustomItem}
-                onAddHighlight={onAddCustomHighlight}
-            />
+        ) : (
+          /* Empty balanced alignment spacer block node when resting on terminal section 12 */
+          <div style={{ width: "120px" }} />
         )}
       </div>
     </div>
