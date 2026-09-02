@@ -59,7 +59,10 @@ export default function WorkspaceFormFlow({
           />
         )}
         {currentStep === 8 && (
-          <SkillsForm resumeData={resumeData} onInputChange={onInputChange} onAddItem={onAddItem} onRemoveItem={onRemoveItem} onAddHighlight={onAddSkillHighlight} />
+          <SkillsForm resumeData={resumeData}
+          onInputChange={onInputChange}
+          onAddItem={onAddItem} onRemoveItem={onRemoveItem}
+          onAddHighlight={onAddSkillHighlight} onRemoveHighlight={onRemoveSkillHighlight}/>
         )}
         {currentStep === 9 && <LinksForm resumeData={resumeData} onInputChange={onInputChange} onAddItem={onAddItem} onRemoveItem={onRemoveItem} />}
         {currentStep === 10 && <ReferencesForm resumeData={resumeData} onInputChange={onInputChange} onAddItem={onAddItem} onRemoveItem={onRemoveItem} />}

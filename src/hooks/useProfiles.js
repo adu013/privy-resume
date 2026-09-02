@@ -340,14 +340,32 @@ const handleAddCustomHighlight = (sectionIdx, itemIdx) => {
     });
   };
 
-  const removeHighlightHelper = (arrayKey, targetIdx, highIdx) => {
+    // Main logic to remove highlights
+    const removeHighlightHelper = (arrayKey, targetIdx, highIdx) => {
     setProfiles((prev) => {
       const currentProfileData = { ...prev[activeProfileName] };
       const list = [...(currentProfileData[arrayKey] || [])];
-      if ((list[targetIdx]?.highlights || []).length <= 1) return prev;
-      list[targetIdx].highlights = list[targetIdx].highlights.filter((_, i) => i !== highIdx);
+
+      // Guard gate: stop deletion if trying to remove the final bullet point line
+      if (!list[targetIdx] || (list[targetIdx].highlights || []).length <= 1) {
+        return prev;
+      }
+
+      // 🔒 THE SHIELD: Create a separate clone of the target item object card block
+      // This completely uncouples its memory references from the active state layers!
+      const targetItem = { ...list[targetIdx] };
+
+      // Filter out exactly one target bullet index smoothly
+      targetItem.highlights = (targetItem.highlights || []).filter((_, i) => i !== highIdx);
+
+      // Stitch the freshly cloned object back into your updated array layers
+      list[targetIdx] = targetItem;
       currentProfileData[arrayKey] = list;
-      return { ...prev, [activeProfileName]: currentProfileData };
+
+      return {
+        ...prev,
+        [activeProfileName]: currentProfileData
+      };
     });
   };
 
