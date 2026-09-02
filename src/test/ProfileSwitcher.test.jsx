@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { vi, describe, test, expect } from "vitest";
 import ProfileSwitcher from "../components/ProfileSwitcher";
 
-describe("ProfileSwitcher Component Subsystem", () => {
+describe("ProfileSwitcher Component Subsystem Matrix", () => {
   const setupMockProps = () => {
     return {
       profiles: {
@@ -13,7 +13,9 @@ describe("ProfileSwitcher Component Subsystem", () => {
       activeProfileName: "Default Profile",
       onSwitch: vi.fn(),
       onCreate: vi.fn(),
-      onDelete: vi.fn()
+      onDelete: vi.fn(),
+      onRenameProfile: vi.fn(), // ✏️ Added Rename mock spy
+      onCloneProfile: vi.fn()    // 📄 Added Clone mock spy
     };
   };
 
@@ -78,5 +80,38 @@ describe("ProfileSwitcher Component Subsystem", () => {
 
     const deleteButton = screen.queryByRole("button", { name: "✕" });
     expect(deleteButton).not.toBeInTheDocument();
+  });
+
+  /* TEST INLINE PROFILE RENAME SUITE */
+  test("toggles inline edit cell input mode and fires onRenameProfile handler on save", () => {
+    const props = setupMockProps();
+    render(<ProfileSwitcher {...props} />);
+
+    // Target-lock and click your pencil edit icon button
+    const renameTriggerBtn = screen.getByTitle("Rename active profile");
+    fireEvent.click(renameTriggerBtn);
+
+    // Verify select box disappears and the text cell mounts directly into the tree
+    const renameInput = screen.getByDisplayValue("Default Profile");
+    expect(renameInput).toBeInTheDocument();
+
+    // Modify rename value parameters and save via checkmark action item button
+    fireEvent.change(renameInput, { target: { value: "Senior Frontend Engineer" } });
+    const saveButton = screen.getByText("✓");
+    fireEvent.click(saveButton);
+
+    expect(props.onRenameProfile).toHaveBeenCalledTimes(1);
+    expect(props.onRenameProfile).toHaveBeenCalledWith("Senior Frontend Engineer");
+  });
+
+  /* NEW REPLICABLE CLONE ACCENT TESTING INJECTIONS */
+  test("dispatches onCloneProfile trigger callback when the Clone button element is clicked", () => {
+    const props = setupMockProps();
+    render(<ProfileSwitcher {...props} />);
+
+    const cloneButton = screen.getByTitle(/Clone \/ Duplicate active profile dataset/i);
+    fireEvent.click(cloneButton);
+
+    expect(props.onCloneProfile).toHaveBeenCalledTimes(1);
   });
 });
