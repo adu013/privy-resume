@@ -42,9 +42,14 @@ export default function App() {
     handleShareDeepLink
   } = useProfiles(blankResumeBlueprint, triggerToast);
 
+  // GUARD:
+  // Render the workspace if the user clicked "Get Started"
+  // OR if they landed directly via a deep share link!
+  const shouldRenderWorkspace = isStarted || isSharedView;
+
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#020617", color: "white" }}>
-      {!isStarted ? (
+      {!shouldRenderWorkspace ? (
         <LandingPage onStart={() => setIsStarted(true)} />
       ) : (
           <Workspace
