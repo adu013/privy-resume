@@ -98,7 +98,10 @@ export default function App() {
 
             // ACTIVATE SHARED VIEW WHEN USER HITS THE DEEP LINK
             isSharedView={isSharedView}
-            onExitPreview={() => setIsSharedView(false)}
+            onExitPreview={() => {
+              setIsStarted(true);
+              setIsSharedView(false);
+            }}
 
             // EXPORT / IMPORT JSON
             onExportJSON={handleExportJSON}
