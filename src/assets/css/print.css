@@ -39,6 +39,16 @@
     margin: 20mm !important; /* Standard printable margins cushion area */
   }
 
+  /* HIDE WORKSPACE MANAGEMENT ELEMENTS FROM THE PDF CANVAS */
+  .profile-switcher-wrapper,
+  select,
+  button,
+  form,
+  .workspace-header,
+  header {
+    display: none !important;
+  }
+
   /* 4. Base Page Container Configuration */
   .a4-page {
     box-shadow: none !important;

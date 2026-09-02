@@ -15,16 +15,19 @@ export default function ProfileSwitcher({
   };
 
   return (
-    <div style={{
-      marginBottom: "20px",
-      padding: "16px",
-      backgroundColor: "#0b1329",
-      borderRadius: "8px",
-      border: "1px solid #1e293b",
-      display: "flex",
-      flexDirection: "column",
-      gap: "12px"
-    }}>
+    <div
+      className="profile-switcher-wrapper"
+      style={{
+        marginBottom: "20px",
+        padding: "16px",
+        backgroundColor: "#0b1329",
+        borderRadius: "8px",
+        border: "1px solid #1e293b",
+        display: "flex",
+        flexDirection: "column",
+        gap: "12px"
+      }}
+    >
       <label style={{ fontSize: "11px", fontWeight: "700", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.5px" }}>
         📁 Resume Profile Switcher
       </label>
