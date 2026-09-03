@@ -1,0 +1,8 @@
+<svg xmlns="http://w3.org" viewBox="0 0 32 32" fill="none">
+  <!-- Rounded branding square container matching Landing Page tokens -->
+  <rect width="32" height="32" rx="8" fill="#4f46e5"/>
+
+  <!-- Exact shield-lock vector graphic asset path centered at 16x16 -->
+  <path d="M16 23.5C20.1421 22.4344 23.2 18.672 23.2 14.1622V9.32432L16 6.5L8.8 9.32432V14.1622C8.8 18.672 11.8579 22.4344 16 23.5Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M16 11.5V13.5M13.5 15.5H18.5V18.5H13.5V15.5Z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
