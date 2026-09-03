@@ -45,7 +45,9 @@ describe("Workspace Presentation View Router Engine", () => {
     render(<Workspace {...props} />);
 
     // Asserts public read-only headline banner mounts into center view frame
-    expect(screen.getByText(/INTERACTIVE PORTFOLIO WORKSPACE/i)).toBeInTheDocument();
+    expect(screen.getByText("Privy")).toBeInTheDocument();
+    expect(screen.getByText("Resume")).toBeInTheDocument();
+
     expect(screen.getByRole("button", { name: /Download PDF \/ Print Resume/i })).toBeInTheDocument();
 
     // Verifies forms step indicator tabs and button text definitions are completely hidden
