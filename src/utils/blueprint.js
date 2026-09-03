@@ -6,9 +6,16 @@
     location: "",
     summary: "",
     competencies: [{ name: "" }],
-    jobs: [
-      { company: "", country: "", companyLink: "", jobTitle: "", jobStart: "", jobEnd: "", highlights: [""] }
-    ],
+    jobs: [{
+      company: "",
+      country: "",
+      companyLink: "",
+      jobTitle: "",
+      employmentType: "None",
+      jobStart: "",
+      jobEnd: "",
+      highlights: [""]
+    }],
     degrees: [
       { collegeName: "", degree: "", specialization: "", eduStart: "", eduEnd: "" }
     ],

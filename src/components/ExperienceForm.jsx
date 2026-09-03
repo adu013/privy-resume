@@ -18,9 +18,11 @@ export default function ExperienceForm({
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       <h3 className="form-section-title">3. Employment History</h3>
 
+      {/* -------- JOB TRACKING LOOP STARTS -------- */}
       {jobsList.map((job, jobIdx) => (
         <div key={jobIdx} style={{ borderBottom: "1px dashed #334155", paddingBottom: "24px", marginBottom: "12px" }}>
 
+          {/* BUTTON: to remove job from tracker  */}
           <div style={{ display: "flex", justifyBetween: "space-between", alignItems: "center", marginBottom: "12px" }}>
             <span style={{ fontSize: "12px", fontWeight: "700", color: "#a855f7" }}>
               Company Position #{jobIdx + 1}
@@ -35,7 +37,9 @@ export default function ExperienceForm({
             )}
           </div>
 
+          {/* FORM GRID: for one job */}
           <div className="form-grid">
+            {/* INPUT: company name */}
             <div className="input-group">
               <label className="input-label">Company Name</label>
               <input
@@ -43,13 +47,17 @@ export default function ExperienceForm({
                 onChange={(e) => onInputChange(e, jobIdx, "jobs")} placeholder="Google Inc." className="form-input"
               />
             </div>
+
+            {/* INPUT: Country / Location */}
             <div className="input-group">
-              <label className="input-label">Country</label>
+              <label className="input-label">Location / Country</label>
               <input
                 type="text" name="country" value={job.country || ""}
                 onChange={(e) => onInputChange(e, jobIdx, "jobs")} placeholder="United States" className="form-input"
               />
             </div>
+
+            {/* INPUT: Company URL */}
             <div className="input-group" style={{ gridColumn: "1 / -1", marginTop: "10px" }}>
               <label className="input-label">Company Website URL</label>
               <input
@@ -61,6 +69,8 @@ export default function ExperienceForm({
                 className="form-input"
               />
             </div>
+
+            {/* INPUT: Job Title */}
             <div className="input-group" style={{ gridColumn: "1 / -1", marginTop: "10px" }}>
               <label className="input-label">Job Title</label>
               <input
@@ -68,6 +78,30 @@ export default function ExperienceForm({
                 onChange={(e) => onInputChange(e, jobIdx, "jobs")} placeholder="Senior Systems Architect" className="form-input"
               />
             </div>
+
+            {/* INPUT: Employment Type */}
+            <div className="input-group" style={{ gridColumn: "1 / -1", marginTop: "10px" }}>
+              <label className="input-label">Employment Type</label>
+              <select
+                name="employmentType"
+                value={job.employmentType || "None"}
+                onChange={(e) => onInputChange(e, jobIdx, "jobs")}
+                className="form-input"
+              >
+                <option value="None">None / Hide</option> {/* This hides the badge */}
+                <option value="Full-Time">Full-Time</option>
+                <option value="Part-Time">Part-Time</option>
+                <option value="Contract">Contract</option>
+                <option value="Part-Time">Freelance</option>
+                <option value="Part-Time">Independent Consultant</option>
+                <option value="Contract">Internship</option>
+                <option value="Test">Apprenticeship</option>
+                <option value="Test">Temporary</option>
+                <option value="Test">Test</option>
+              </select>
+            </div>
+
+            {/* INPUT: Job Start Date */}
             <div className="input-group" style={{ marginTop: "10px" }}>
               <label className="input-label">Start Mon-Year</label>
               <input
@@ -75,6 +109,8 @@ export default function ExperienceForm({
                 onChange={(e) => onInputChange(e, jobIdx, "jobs")} placeholder="Jan-2022" className="form-input"
               />
             </div>
+
+            {/* INPUT: Job End Date */}
             <div className="input-group" style={{ marginTop: "10px" }}>
               <label className="input-label">End Mon-Year</label>
               <input
@@ -120,7 +156,9 @@ export default function ExperienceForm({
 
         </div>
       ))}
+      {/* -------- JOB TRACKING LOOP ENDS -------- */}
 
+      {/* BUTTON: TO ADD ANOTHER COMPANY */}
       <button
         type="button" onClick={() => onAddItem("jobs", emptyJob)}
         style={{ padding: "8px 12px", background: "#1e293b", color: "#cbd5e1", border: "1px solid #334155", borderRadius: "6px", cursor: "pointer", fontSize: "12px", alignSelf: "start" }}

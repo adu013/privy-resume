@@ -13,6 +13,22 @@ export default function PreviewExperience({ resumeData }) {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start" }}>
               <div>
                 <strong style={{ fontSize: "14px", color: "#0f172a" }}>{job.jobTitle}</strong>
+
+                {job.employmentType && job.employmentType !== "None" && (
+                  <>
+                    <span style={{ color: "#94a3b8", margin: "0 8px", fontSize: "13px" }}>|</span>
+                    <span
+                      style={{
+                        fontSize: "13px",
+                        color: "#64748b", //
+                        textDecoration: "none",
+                        borderBottom: "1px dashed #cbd5e1"
+                      }}
+                    >
+                      {job.employmentType}
+                    </span>
+                  </>
+                )}
                 <div className="resume-text" style={{ fontStyle: "italic", marginTop: "2px" }}>
                   {job.company}{job.country && `, ${job.country}`}
                 </div>
