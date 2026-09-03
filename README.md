@@ -1,4 +1,4 @@
-# 🔒 PrivyResume (v1.2.1)
+# 🔒 PrivyResume
 
 PrivyResume is a production-ready, open-source, **100% serverless, client-side resume workbench engine**. Built explicitly for security-conscious software engineers, developers, and tech professionals, it compiles standard Markdown-ready background fields into beautiful, ATS-optimized, high-density resumes without exposing personal metadata to tracking databases.
 
